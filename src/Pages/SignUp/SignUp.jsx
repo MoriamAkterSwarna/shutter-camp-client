@@ -1,6 +1,7 @@
-import React from "react";
+
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AiOutlineUser } from 'react-icons/ai';
 
 const SignUp = () => {
   const {
@@ -22,13 +23,16 @@ const SignUp = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen bg-black bg-opacity-90 relative">
       <div className="hero-content flex-col ">
-        <div className="text-center ">
-          <h1 className="text-4xl font-bold">Sign up</h1>
+        <div className="text-center  ">
+          <h1 className="text-4xl font-bold text-white">Sign up</h1>
         </div>
-        <div className="card w-96 shadow-2xl bg-black">
-          <form className="card-body">
+        <div className="card w-96 shadow-2xl bg-black mt-10">
+            <div className="absolute -top-14 left-36">
+                <AiOutlineUser className="text-8xl text-emerald-500"></AiOutlineUser>
+            </div>
+          <form className="card-body mt-2">
             <div className="form-control">
               <input
                 type="text"
@@ -79,8 +83,8 @@ const SignUp = () => {
                   character.
                 </p>
               )}
-
-              <div className="form-control mt-2">
+            </div>
+              <div className="form-control">
                 <input
                   type="password"
                   {...register("confirmPassword", {
@@ -108,7 +112,7 @@ const SignUp = () => {
                   <span className="text-red-600">Photo URL is required</span>
                 )}
               </div>
-            </div>
+            
             <div className="form-control mt-6">
               <input
                 className="btn bg-emerald-500 border-none"
@@ -119,7 +123,7 @@ const SignUp = () => {
           </form>
           <p className="text-white mx-auto mb-4">
             <small>
-              Already have an account <Link to="/login">Login</Link>
+              Already have an account? <Link to="/login" className="text-emerald-700">Login</Link>
             </small>
           </p>
         </div>
