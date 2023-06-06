@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AiOutlineUser } from 'react-icons/ai';
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -115,17 +116,18 @@ const SignUp = () => {
             
             <div className="form-control mt-6">
               <input
-                className="btn bg-emerald-500 border-none"
+                className="btn bg-emerald-500 border-none hover:bg-emerald-700 text-white"
                 type="submit"
                 value="Sign Up"
               />
             </div>
           </form>
-          <p className="text-white mx-auto mb-4">
+          <p className="text-white mx-auto">
             <small>
               Already have an account? <Link to="/login" className="text-emerald-700">Login</Link>
             </small>
           </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

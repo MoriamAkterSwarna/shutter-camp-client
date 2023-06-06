@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AiOutlineUser } from 'react-icons/ai';
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
     const {
@@ -50,7 +51,7 @@ const Login = () => {
             
             <div className="form-control mt-6">
               <input
-                className="btn bg-emerald-500 border-none"
+                className="btn bg-emerald-500 border-none hover:bg-emerald-700 text-white"
                 type="submit"
                 value="Login"
               />
@@ -61,6 +62,7 @@ const Login = () => {
               New Here? <Link to="/signup" className="text-emerald-700">Please Sign Up</Link>
             </small>
           </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>
