@@ -41,7 +41,7 @@ const NavigationBar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/">
+        <Link to="/" className="ps-10">
           <img
             className="w-24 h-24 rounded-full border-2 border-emerald-200"
             src={logo}
