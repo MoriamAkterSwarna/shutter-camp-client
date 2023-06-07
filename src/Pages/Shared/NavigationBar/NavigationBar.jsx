@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 const NavigationBar = () => {
   const {user, logOut,updateUserProfile} = useContext(AuthContext);
-  console.log(user)
+  // console.log(user)
 
   const handleLogOut = () => {
     logOut()
@@ -47,7 +47,7 @@ const NavigationBar = () => {
             </li>
             {
               user && <li>
-              <Link to='/'>Dashboard</Link>
+              <Link to='/dashboard'>Dashboard</Link>
               </li>
             }
           </ul>
@@ -74,7 +74,7 @@ const NavigationBar = () => {
             </li>
             {
               user && <li>
-              <Link to='/'>Dashboard</Link>
+              <Link to='/dashboard'>Dashboard</Link>
               </li>
             }
         </ul>

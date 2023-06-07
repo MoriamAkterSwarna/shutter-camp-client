@@ -29,28 +29,50 @@ const SignUp = () => {
       const email = data.email;
       const password= data.password;
       const photo = data.photoUrl;
-      // console.log(name, email, password, photo)
+      console.log(name, email, password, photo)
+
       createUser(email, password, name, photo)
-      .then(result =>{
+      .then(result => {
         const createdUser = result.user;
+        console.log(createdUser);
         updateUserProfile(name, photo)
-        toast('🦄 Registered Successfully!', {
-          position: "top-left",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-          setTimeout(() => {
-            navigate(from, {replace:true})
-          }, 4000);
-         }
-          
-      )
+       
+          const savedUser = {name: name, email: email}
+          console.log(savedUser);
+          fetch('http://localhost:5000/users',{
+            method: 'POST',
+            headers: {
+              'content-type' : 'application/json'
+            },
+            body: JSON.stringify(savedUser)
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            if(data.insertedId){
+              toast('🦄 Registered Successfully!', {
+                        position: "top-left",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        });
+                        setTimeout(() => {
+                          navigate(from, {replace:true})
+                        }, 4000);
+            }
+          })
+        })
+        
+      
       .catch(error => console.log(error))
+      
+      
+   
+      
     }
 };
 
