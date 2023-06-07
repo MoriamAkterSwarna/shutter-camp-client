@@ -1,4 +1,4 @@
-##### Shutter Camp
+# Shutter Camp
 
 
 ## Features: 
@@ -8,5 +8,5 @@
 - 
 - 
 
-# Technologies: 
+## Technologies: 
 ### Live Site link: 
