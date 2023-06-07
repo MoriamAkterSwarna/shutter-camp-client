@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 
 
 export const AuthContext = createContext(null);
@@ -13,7 +14,27 @@ const AuthProvider = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
     const gitHubProvider = new GithubAuthProvider();
 
-      const updateUserProfile = (name,photo)=>{
+     
+    
+    const createUser = (email, password ) =>{
+        setLoader(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+    const signInUser = (email, password) =>{
+        setLoader(true);
+        return signInWithEmailAndPassword(auth, email,password)
+    }
+    const signInWithGoogle = () =>{
+        setLoader(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
+    const signInWithGithub = () =>{
+        setLoader(true);
+        return signInWithPopup(auth, gitHubProvider)
+    }
+
+    const updateUserProfile = (name,photo)=>{
         updateProfile(auth.currentUser, {
           displayName: name, photoURL: photo
           
@@ -24,23 +45,6 @@ const AuthProvider = ({children}) => {
       }
       
 
-    const signInWithGoogle = () =>{
-        setLoader(true);
-        return signInWithPopup(auth, googleProvider);
-    }
-
-    const signInWithGithub = () =>{
-        setLoader(true);
-        return signInWithPopup(auth, gitHubProvider)
-    }
-    const createUser = (email, password ) =>{
-        setLoader(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
-    const signInUser = (email, password) =>{
-        setLoader(true);
-        return signInWithEmailAndPassword(auth, email,password)
-    }
     const logOut = () =>{
         setLoader(true);
         return signOut(auth);
@@ -49,7 +53,19 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribe =  onAuthStateChanged(auth,loggedUser =>{
             setUser(loggedUser);
-            setLoader(false);
+            if(loggedUser){
+                axios.post('http://localhost:5000/jwt',{email: loggedUser.email})
+                .then(data =>{
+                  console.log(data.data.jsonToken);
+                  localStorage.setItem('access-token', data.data.jsonToken)
+                  setLoader(false);
+                })
+              }
+              else{
+                localStorage.removeItem('access-token')
+              }
+  
+            
         })
         return () =>{
             unsubscribe();
