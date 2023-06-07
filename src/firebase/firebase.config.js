@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA9Iyx52JiNMxTfG6aYerQ2OTV5DeExWo8",
-  authDomain: "shutter-camp.firebaseapp.com",
-  projectId: "shutter-camp",
-  storageBucket: "shutter-camp.appspot.com",
-  messagingSenderId: "138213486872",
-  appId: "1:138213486872:web:2943c8adc5fe0f1f83ee6d"
+  apiKey: import.meta.env.VITE_apiKey ,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderIdz,
+  appId:import.meta.env.VITE_appId 
 };
 
 // Initialize Firebase

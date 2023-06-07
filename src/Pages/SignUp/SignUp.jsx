@@ -23,15 +23,17 @@ const SignUp = () => {
   const from = location.state?.from.pathname || "/";
 
   const onSubmit = data => {
-    console.log(data)
+    // console.log(data)
     if(data.password === data.ConfirmPassword){
       const name = data.name;
       const email = data.email;
       const password= data.password;
-      const photo = data.photo;
-      createUser(email, password)
+      const photo = data.photoUrl;
+      // console.log(name, email, password, photo)
+      createUser(email, password, name, photo)
       .then(result =>{
         const createdUser = result.user;
+        updateUserProfile(name, photo)
         toast('🦄 Registered Successfully!', {
           position: "top-left",
           autoClose: 4000,
@@ -125,7 +127,7 @@ const SignUp = () => {
               <div className="form-control">
                 <input
                   type="text"
-                  {...register("photoURL", { required: true })}
+                  {...register("photoUrl", { required: true })}
                   placeholder="Photo URL"
                   className="input input-bordered"
                 />

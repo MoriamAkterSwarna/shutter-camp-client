@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const SocialLogin = () => {
   const { signInWithGoogle,signInWithGithub } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -16,7 +17,20 @@ const SocialLogin = () => {
       const loggedInUser = result.user;
       console.log(loggedInUser);
 
-      navigate(from, { replace: true });
+      toast('🦄 Log in Successfully!', {
+        position: "top-left",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        setTimeout(() => {
+          navigate(from, {replace:true})
+        }, 4000);
+
     }
     
     );
@@ -27,7 +41,20 @@ const SocialLogin = () => {
     signInWithGithub()
     .then(result => {
         const loggedUser = result.user;
-        navigate(from ,{replace: true})
+        toast('🦄 Log in Successfully!', {
+          position: "top-left",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+          setTimeout(() => {
+            navigate(from, {replace:true})
+          }, 4000);
+
         
     })
     .catch(error => console.log(error))
@@ -44,6 +71,7 @@ const SocialLogin = () => {
           <FaGithub onClick={handleGithubSignIn} className="text-white text-xl"></FaGithub>
         </button>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

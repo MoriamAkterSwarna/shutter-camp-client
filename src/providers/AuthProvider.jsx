@@ -13,20 +13,16 @@ const AuthProvider = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
     const gitHubProvider = new GithubAuthProvider();
 
-
-    // const userDetails=(name,photoUrl)=>{
-    //     updateProfile(auth.currentUser, {
-    //       displayName: name, photoURL: photoUrl
-    //     })
-    //     .then(() => setUser((user) => (
-    //       { ...user, displayName: name, photoURL: photoUrl })))
-    //    .catch((error) => { console.log(error) });
-    //   }
-      const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        });
-    }
+      const updateUserProfile = (name,photo)=>{
+        updateProfile(auth.currentUser, {
+          displayName: name, photoURL: photo
+          
+        })
+        .then(() => setUser((user) => (
+          { ...user, displayName: name, photoURL: photo })))
+       .catch((error) => { console.log(error) });
+      }
+      
 
     const signInWithGoogle = () =>{
         setLoader(true);
