@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineUser } from 'react-icons/ai';
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
-
+import { AuthContext } from "../../providers/AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
     const {
         register,
@@ -11,6 +13,42 @@ const Login = () => {
         watch,
         formState: { errors },
       } = useForm();
+      const { signInUser } = useContext(AuthContext);
+      const navigate = useNavigate();
+      const location = useLocation();
+     
+  
+    const from = location.state?.from.pathname || "/";
+  
+    const onSubmit = data => {
+      console.log(data)
+      const email = data.email;
+      const password = data.password;
+       
+      signInUser(email, password)
+        .then(result =>{
+          const createdUser = result.user;
+          toast('🦄 Log in Successfully!', {
+            position: "top-left",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            setTimeout(() => {
+              navigate(from, {replace:true})
+            }, 4000);
+
+            
+           }
+            
+        )
+        .catch(error => console.log(error))
+      
+  };
     return (
         <div className="hero min-h-screen bg-black bg-opacity-90 relative">
       <div className="hero-content flex-col ">
@@ -21,7 +59,7 @@ const Login = () => {
             <div className="absolute -top-14 left-36">
                 <AiOutlineUser className="text-8xl text-emerald-500"></AiOutlineUser>
             </div>
-          <form className="card-body mt-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body mt-2">
            
 
             <div className="form-control">
@@ -65,6 +103,7 @@ const Login = () => {
           <SocialLogin></SocialLogin>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
     );
 };

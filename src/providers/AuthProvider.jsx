@@ -1,18 +1,83 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { createContext, useEffect, useState } from "react";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import app from "../firebase/firebase.config";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyA9Iyx52JiNMxTfG6aYerQ2OTV5DeExWo8",
-  authDomain: "shutter-camp.firebaseapp.com",
-  projectId: "shutter-camp",
-  storageBucket: "shutter-camp.appspot.com",
-  messagingSenderId: "138213486872",
-  appId: "1:138213486872:web:2943c8adc5fe0f1f83ee6d"
+
+export const AuthContext = createContext(null);
+
+const auth = getAuth(app)
+const AuthProvider = ({children}) => {
+    const [user, setUser] = useState(null);
+    const [loader, setLoader] = useState(true)
+
+    const googleProvider = new GoogleAuthProvider();
+    const gitHubProvider = new GithubAuthProvider();
+
+
+    // const userDetails=(name,photoUrl)=>{
+    //     updateProfile(auth.currentUser, {
+    //       displayName: name, photoURL: photoUrl
+    //     })
+    //     .then(() => setUser((user) => (
+    //       { ...user, displayName: name, photoURL: photoUrl })))
+    //    .catch((error) => { console.log(error) });
+    //   }
+      const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        });
+    }
+
+    const signInWithGoogle = () =>{
+        setLoader(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
+    const signInWithGithub = () =>{
+        setLoader(true);
+        return signInWithPopup(auth, gitHubProvider)
+    }
+    const createUser = (email, password ) =>{
+        setLoader(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+    const signInUser = (email, password) =>{
+        setLoader(true);
+        return signInWithEmailAndPassword(auth, email,password)
+    }
+    const logOut = () =>{
+        setLoader(true);
+        return signOut(auth);
+    }
+
+    useEffect(()=>{
+        const unsubscribe =  onAuthStateChanged(auth,loggedUser =>{
+            setUser(loggedUser);
+            setLoader(false);
+        })
+        return () =>{
+            unsubscribe();
+        }
+    },[])
+    const authInfo={
+        user,
+        loader,
+        setLoader,
+        signInWithGoogle,
+        signInWithGithub,
+        createUser,
+        signInUser,
+        logOut, 
+        updateUserProfile
+        
+
+    }
+
+    return (
+        <AuthContext.Provider value={authInfo}>
+        {children}
+      </AuthContext.Provider>
+    );
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export default app;
+export default AuthProvider;

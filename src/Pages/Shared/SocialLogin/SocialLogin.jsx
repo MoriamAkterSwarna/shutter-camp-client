@@ -1,19 +1,51 @@
+import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-    return (
-        <div>
-            <div className="divider"></div>
-            <div className="w-full text-center my-4">
-                <button  className="btn btn-circle bg-emerald-500 border-none hover:bg-emerald-700 mr-2">
-                    <FaGoogle className="text-white text-xl"></FaGoogle>
-                </button>
-                <button  className="btn btn-circle bg-emerald-500 hover:bg-emerald-700 border-none">
-                    <FaGithub className="text-white text-xl"></FaGithub>
-                </button>
-            </div>
-        </div>
+  const { signInWithGoogle,signInWithGithub } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+    .then((result) => {
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+
+      navigate(from, { replace: true });
+    }
+    
     );
+    
+    
+  };
+  const handleGithubSignIn = () =>{
+    signInWithGithub()
+    .then(result => {
+        const loggedUser = result.user;
+        navigate(from ,{replace: true})
+        
+    })
+    .catch(error => console.log(error))
+
+}
+  return (
+    <div>
+      <div className="divider"></div>
+      <div className="w-full text-center my-4">
+        <button className="btn btn-circle bg-emerald-500 border-none hover:bg-emerald-700 mr-2">
+          <FaGoogle onClick={handleGoogleSignIn} className="text-white text-xl"></FaGoogle>
+        </button>
+        <button className="btn btn-circle bg-emerald-500 hover:bg-emerald-700 border-none">
+          <FaGithub onClick={handleGithubSignIn} className="text-white text-xl"></FaGithub>
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default SocialLogin;

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 const NavigationBar = () => {
+  const {user, logOut,updateUserProfile} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+        .then(() => { })
+        .catch(error => console.log(error));
+}
   return (
     <div className="navbar bg-emerald-50 rounded-sm">
       <div className="navbar-start">
@@ -67,18 +75,27 @@ const NavigationBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to="/login"
-          className=" btn btn-outline hover:bg-emerald-500 hover:outline-emerald-500 mr-3"
-        >
-          Login
-        </Link>
+        
+        {
+            user ? <>
+                <button onClick={handleLogOut}  className=" btn btn-outline hover:bg-emerald-500 hover:outline-emerald-500 hover:border-none mr-3">LogOut</button>
+            </> : <>
+                <li ><Link  className=" btn btn-outline hover:bg-emerald-500 hover:outline-emerald-500 hover:border-none mr-3" to="/login">Login</Link></li>
+            </>
+        }
+         <div className="flex items-center">
+         <span>
+            {
+              user &&  ( <img src={user?.photoURL} title={user?.displayName} className='rounded-full w-20 mr-2' alt=""/>)
+            }
+          </span>
         <Link
           to="/signup"
           className="btn bg-emerald-500 text-white hover:bg-black"
         >
           Sign Up
         </Link>
+         </div>
       </div>
     </div>
   );
