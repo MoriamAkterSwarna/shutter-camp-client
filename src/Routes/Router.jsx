@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         children:[
             {
                 path: 'allusers',
-                element:<AdminRoutes><AllUsers></AllUsers></AdminRoutes>
+                element:<AllUsers></AllUsers>
             },
             {
                 path: 'addclass',

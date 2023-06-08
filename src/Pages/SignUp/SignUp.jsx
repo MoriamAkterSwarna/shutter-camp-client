@@ -31,52 +31,52 @@ const SignUp = () => {
       console.log(name, email, password, photo);
 
       createUser(email, password, name, photo)
-        .then((result) => {
-          const createdUser = result.user;
-          axios
-            .post("http://localhost:5000/jwt", { email: data.email })
-            .then((data) => {
-              //   console.log(data.data.jsonToken);
-              const token = data.data.jsonToken
-              localStorage.setItem("access-token", data.data.jsonToken);
-              updateUserProfile(name, photo);
+      .then((result) => {
+        const createdUser = result.user;
+        axios
+          .post("http://localhost:5000/jwt", { email: data.email })
+          .then((data) => {
+            //   console.log(data.data.jsonToken);
+            const token = data.data.jsonToken
+            localStorage.setItem("access-token", data.data.jsonToken);
+            updateUserProfile(name, photo);
 
-              const savedUser = { name: name, email: email };
-              console.log(savedUser);
-              fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                  authorization: token,
-                },
-                body: JSON.stringify(savedUser),
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  console.log(data);
-                  if (data.insertedId) {
-                    toast("🦄 Registered Successfully!", {
-                      position: "top-left",
-                      autoClose: 4000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                    });
-                    setTimeout(() => {
-                      navigate(from, { replace: true });
-                    }, 4000);
-                  }
-                });
-            });
-          console.log(createdUser);
-        })
+            const savedUser = { name: name, email: email };
+            console.log(savedUser);
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                authorization: token,
+              },
+              body: JSON.stringify(savedUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                if (data.insertedId) {
+                  toast("🦄 Registered Successfully!", {
+                    position: "top-left",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
+                  setTimeout(() => {
+                    navigate(from, { replace: true });
+                  }, 4000);
+                }
+              });
+          });
+        console.log(createdUser);
+      })
 
-        .catch((error) => console.log(error));
-    }
-  };
+      .catch((error) => console.log(error));
+  }
+};
 
   return (
     <div className="hero min-h-screen bg-black bg-opacity-90 relative">

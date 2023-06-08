@@ -2,18 +2,25 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaChalkboardTeacher, FaHome, FaUser, FaUsers } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
-import { MdAssignmentAdd, MdBookmarkAdded, MdOutlineAddChart, MdPayments} from "react-icons/md";
+import {
+  MdAssignmentAdd,
+  MdBookmarkAdded,
+  MdOutlineAddChart,
+  MdPayments,
+} from "react-icons/md";
 import { BiSelectMultiple } from "react-icons/bi";
-
 
 import useInstructor from "../hooks/useInstructor";
 import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
-// const isAdmin = true;
-const [isAdmin] = useAdmin()
-   
-    console.log(isAdmin)
-  const [isInstructor] = useInstructor()
+  
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin)
+
+  // console.log(isAdmin);
+  const [isInstructor] = useInstructor();
+  console.log(isInstructor)
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -33,58 +40,96 @@ const [isAdmin] = useAdmin()
           <ul className="menu p-4 w-80 h-full bg-emerald-200 text-base-content">
             {/* Sidebar content here */}
 
-
-
             {/* admin dashboard */}
-            {
-                isAdmin && <><li>
-                <NavLink className='hover:bg-emerald-700 hover:text-white'><FaHome></FaHome>Admin Home</NavLink>
-              </li>
-              <li className="mt-2">
-              <NavLink className='hover:bg-emerald-700 hover:text-white'><SiGoogleclassroom></SiGoogleclassroom> Manage Class</NavLink>
-              </li>
-              <li className="mt-2">
-              <NavLink to='/dashboard/allusers' className='btn-neutral hover:bg-emerald-700 hover:text-white'><FaUsers></FaUsers>Manage Users</NavLink>
-              </li></>
-            }
+            {isAdmin && (
+              <>
+                <li>
+                  <NavLink className="hover:bg-emerald-700 hover:text-white">
+                    <FaHome></FaHome>Admin Home
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink className="hover:bg-emerald-700 hover:text-white">
+                    <SiGoogleclassroom></SiGoogleclassroom> Manage Class
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/dashboard/allusers"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                    <FaUsers></FaUsers>Manage Users
+                  </NavLink>
+                </li>
+              </>
+            )}
             {/* instructor dashboard */}
 
-            {
-                isInstructor ? <>
-              <li className="mt-2">
-              <NavLink to='/dashboard/addclass' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdAssignmentAdd></MdAssignmentAdd> Add a Class</NavLink>
-              </li>
-              <li className="mt-2">
-              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdOutlineAddChart></MdOutlineAddChart>My classes</NavLink>
-              </li></>
-              :
+            {isInstructor && isInstructor? (
               <>
-               {/* student dashboard */}
-            <li className="mt-2">
-              <NavLink className='hover:bg-emerald-700 hover:text-white'><BiSelectMultiple></BiSelectMultiple> My Selected Classes</NavLink>
-              </li>
-              <li className="mt-2">
-              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes</NavLink>
-              </li>
-              <li className="mt-2">
-              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdPayments></MdPayments> Payment</NavLink>
-              </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/dashboard/addclass"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                    <MdAssignmentAdd></MdAssignmentAdd> Add a Class
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                    <MdOutlineAddChart></MdOutlineAddChart>My classes
+                  </NavLink>
+                </li>
               </>
-            }
-
-
-           
-
+            ) : (
+              <>
+                {/* student dashboard */}
+                <li className="mt-2">
+                  <NavLink className="hover:bg-emerald-700 hover:text-white">
+                    <BiSelectMultiple></BiSelectMultiple> My Selected Classes
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                    <MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                    <MdPayments></MdPayments> Payment
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             <div className="divider"></div>
             <li className="mt-2">
-            <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><FaHome></FaHome>Home</NavLink>
+              <NavLink
+                to="/"
+                className="btn-neutral hover:bg-emerald-700 hover:text-white"
+              >
+                <FaHome></FaHome>Home
+              </NavLink>
             </li>
             <li className="mt-2">
-            <NavLink className='hover:bg-emerald-700 hover:text-white'><FaChalkboardTeacher></FaChalkboardTeacher>Instructors</NavLink>
+              <NavLink className="hover:bg-emerald-700 hover:text-white">
+                <FaChalkboardTeacher></FaChalkboardTeacher>Instructors
+              </NavLink>
             </li>
             <li className="mt-2">
-            <NavLink className='hover:bg-emerald-700 hover:text-white'> <SiGoogleclassroom></SiGoogleclassroom> Classes</NavLink>
+              <NavLink className="hover:bg-emerald-700 hover:text-white">
+                {" "}
+                <SiGoogleclassroom></SiGoogleclassroom> Classes
+              </NavLink>
             </li>
           </ul>
         </div>
