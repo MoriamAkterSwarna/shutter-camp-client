@@ -16,13 +16,32 @@ const AllUsers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount) {
           refetch();
           Swal.fire({
             position: "top-center",
             icon: "success",
             title: `${user.name} is an admin now`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+  const handleMakeInstructor = (user) => {
+    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `${user.name} is an instructor now`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -46,7 +65,7 @@ const AllUsers = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {users.map((user, index) => (
+            {Array.isArray(users) && users.map((user, index) => (
               <tr key={user._id}>
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
@@ -59,7 +78,7 @@ const AllUsers = () => {
                   </button>}</td>
                 
                 <td>{user.role === "instructor" ? <span className="text-emerald-500 font-semibold">Instructor</span> : <button
-                    onClick={() => handleMakeAdmin(user)}
+                    onClick={() => handleMakeInstructor(user)}
                     className="btn bg-emerald-400 text-white hover:bg-emerald-600"
                   >
                     <GiTeacher />

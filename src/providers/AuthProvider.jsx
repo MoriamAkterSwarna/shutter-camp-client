@@ -51,15 +51,17 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(()=>{
-        const unsubscribe =  onAuthStateChanged(auth,loggedUser =>{
-            setUser(loggedUser);
-            if(loggedUser){
-                axios.post('http://localhost:5000/jwt',{email: loggedUser.email})
-                .then(data =>{
-                  console.log(data.data.jsonToken);
-                  localStorage.setItem('access-token', data.data.jsonToken)
-                  setLoader(false);
-                })
+        const unsubscribe =  onAuthStateChanged(auth,currentUser=>{
+            setUser(currentUser);
+            console.log(currentUser)
+            if(currentUser){
+                // axios.post('http://localhost:5000/jwt',{email: currentUser.email})
+                // .then(data =>{
+                // //   console.log(data.data.jsonToken);
+                //   localStorage.setItem('access-token', data.data.jsonToken)
+                //   setLoader(false);
+                // })
+                // setLoader(false);
               }
               else{
                 localStorage.removeItem('access-token')

@@ -6,6 +6,10 @@ import Errorpage from "../Pages/Errorpage/Errorpage";
 import Home from "../Pages/Home/Home/Home";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import AdminRoutes from "./AdminRoutes";
+import AddClass from "../Pages/Dashboard/AddClass";
+
+
 
 export const router = createBrowserRouter([
     {
@@ -35,7 +39,11 @@ export const router = createBrowserRouter([
         children:[
             {
                 path: 'allusers',
-                element: <AllUsers></AllUsers>
+                element:<AdminRoutes><AllUsers></AllUsers></AdminRoutes>
+            },
+            {
+                path: 'addclass',
+                element: <AddClass></AddClass>
             }
         ]
        

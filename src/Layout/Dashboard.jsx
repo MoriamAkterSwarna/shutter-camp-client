@@ -2,8 +2,18 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaChalkboardTeacher, FaHome, FaUser, FaUsers } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
+import { MdAssignmentAdd, MdBookmarkAdded, MdOutlineAddChart, MdPayments} from "react-icons/md";
+import { BiSelectMultiple } from "react-icons/bi";
+
+
+import useInstructor from "../hooks/useInstructor";
+import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
-    const isAdmin = true;
+// const isAdmin = true;
+const [isAdmin] = useAdmin()
+   
+    console.log(isAdmin)
+  const [isInstructor] = useInstructor()
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -22,15 +32,48 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-emerald-200 text-base-content">
             {/* Sidebar content here */}
-            <li>
-              <NavLink className='hover:bg-emerald-700 hover:text-white'><FaHome></FaHome>Admin Home</NavLink>
-            </li>
+
+
+
+            {/* admin dashboard */}
+            {
+                isAdmin && <><li>
+                <NavLink className='hover:bg-emerald-700 hover:text-white'><FaHome></FaHome>Admin Home</NavLink>
+              </li>
+              <li className="mt-2">
+              <NavLink className='hover:bg-emerald-700 hover:text-white'><SiGoogleclassroom></SiGoogleclassroom> Manage Class</NavLink>
+              </li>
+              <li className="mt-2">
+              <NavLink to='/dashboard/allusers' className='btn-neutral hover:bg-emerald-700 hover:text-white'><FaUsers></FaUsers>Manage Users</NavLink>
+              </li></>
+            }
+            {/* instructor dashboard */}
+
+            {
+                isInstructor ? <>
+              <li className="mt-2">
+              <NavLink to='/dashboard/addclass' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdAssignmentAdd></MdAssignmentAdd> Add a Class</NavLink>
+              </li>
+              <li className="mt-2">
+              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdOutlineAddChart></MdOutlineAddChart>My classes</NavLink>
+              </li></>
+              :
+              <>
+               {/* student dashboard */}
             <li className="mt-2">
-            <NavLink className='hover:bg-emerald-700 hover:text-white'><SiGoogleclassroom></SiGoogleclassroom> Manage Class</NavLink>
-            </li>
-            <li className="mt-2">
-            <NavLink to='/dashboard/allusers' className='btn-neutral hover:bg-emerald-700 hover:text-white'><FaUsers></FaUsers>All Users</NavLink>
-            </li>
+              <NavLink className='hover:bg-emerald-700 hover:text-white'><BiSelectMultiple></BiSelectMultiple> My Selected Classes</NavLink>
+              </li>
+              <li className="mt-2">
+              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes</NavLink>
+              </li>
+              <li className="mt-2">
+              <NavLink to='/' className='btn-neutral hover:bg-emerald-700 hover:text-white'><MdPayments></MdPayments> Payment</NavLink>
+              </li>
+              </>
+            }
+
+
+           
 
 
             <div className="divider"></div>

@@ -1,12 +1,12 @@
-
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser } from "react-icons/ai";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const SignUp = () => {
   const {
     register,
@@ -16,65 +16,67 @@ const SignUp = () => {
   } = useForm();
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const location = useLocation();
-   
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const from = location.state?.from.pathname || "/";
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     // console.log(data)
-    if(data.password === data.ConfirmPassword){
+    if (data.password === data.ConfirmPassword) {
       const name = data.name;
       const email = data.email;
-      const password= data.password;
+      const password = data.password;
       const photo = data.photoUrl;
-      console.log(name, email, password, photo)
+      console.log(name, email, password, photo);
 
       createUser(email, password, name, photo)
-      .then(result => {
-        const createdUser = result.user;
-        console.log(createdUser);
-        updateUserProfile(name, photo)
-       
-          const savedUser = {name: name, email: email}
-          console.log(savedUser);
-          fetch('http://localhost:5000/users',{
-            method: 'POST',
-            headers: {
-              'content-type' : 'application/json'
-            },
-            body: JSON.stringify(savedUser)
-          })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-            if(data.insertedId){
-              toast('🦄 Registered Successfully!', {
-                        position: "top-left",
-                        autoClose: 4000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        });
-                        setTimeout(() => {
-                          navigate(from, {replace:true})
-                        }, 4000);
-            }
-          })
+        .then((result) => {
+          const createdUser = result.user;
+          axios
+            .post("http://localhost:5000/jwt", { email: data.email })
+            .then((data) => {
+              //   console.log(data.data.jsonToken);
+              const token = data.data.jsonToken
+              localStorage.setItem("access-token", data.data.jsonToken);
+              updateUserProfile(name, photo);
+
+              const savedUser = { name: name, email: email };
+              console.log(savedUser);
+              fetch("http://localhost:5000/users", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  authorization: token,
+                },
+                body: JSON.stringify(savedUser),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                  if (data.insertedId) {
+                    toast("🦄 Registered Successfully!", {
+                      position: "top-left",
+                      autoClose: 4000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                    setTimeout(() => {
+                      navigate(from, { replace: true });
+                    }, 4000);
+                  }
+                });
+            });
+          console.log(createdUser);
         })
-        
-      
-      .catch(error => console.log(error))
-      
-      
-   
-      
+
+        .catch((error) => console.log(error));
     }
-};
+  };
 
   return (
     <div className="hero min-h-screen bg-black bg-opacity-90 relative">
@@ -83,11 +85,11 @@ const SignUp = () => {
           <h1 className="text-4xl font-bold text-white">Sign up</h1>
         </div>
         <div className="card w-96 shadow-2xl bg-black mt-10">
-            <div className="absolute -top-14 left-36">
-                <AiOutlineUser className="text-8xl text-emerald-500"></AiOutlineUser>
-            </div>
-        
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body mt-2">
+          <div className="absolute -top-14 left-36">
+            <AiOutlineUser className="text-8xl text-emerald-500"></AiOutlineUser>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body mt-2">
             <div className="form-control">
               <input
                 type="text"
@@ -138,26 +140,31 @@ const SignUp = () => {
                 </p>
               )}
             </div>
-              <div className="form-control">
-              <input className="input input-bordered" type="password" {...register("ConfirmPassword" ,{required: true})} placeholder="Confirm Password"/>
-                {errors.email && (
-                  <span className="text-red-500">
-                    Password and Confirm Password should be same
-                  </span>
-                )}
-              </div>
-              <div className="form-control">
-                <input
-                  type="text"
-                  {...register("photoUrl", { required: true })}
-                  placeholder="Photo URL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && (
-                  <span className="text-red-600">Photo URL is required</span>
-                )}
-              </div>
-            
+            <div className="form-control">
+              <input
+                className="input input-bordered"
+                type="password"
+                {...register("ConfirmPassword", { required: true })}
+                placeholder="Confirm Password"
+              />
+              {errors.email && (
+                <span className="text-red-500">
+                  Password and Confirm Password should be same
+                </span>
+              )}
+            </div>
+            <div className="form-control">
+              <input
+                type="text"
+                {...register("photoUrl", { required: true })}
+                placeholder="Photo URL"
+                className="input input-bordered"
+              />
+              {errors.photoURL && (
+                <span className="text-red-600">Photo URL is required</span>
+              )}
+            </div>
+
             <div className="form-control mt-6">
               <input
                 className="btn bg-emerald-500 border-none hover:bg-emerald-700 text-white"
@@ -166,10 +173,13 @@ const SignUp = () => {
               />
             </div>
           </form>
-       
+
           <p className="text-white mx-auto">
             <small>
-              Already have an account? <Link to="/login" className="text-emerald-700">Login</Link>
+              Already have an account?{" "}
+              <Link to="/login" className="text-emerald-700">
+                Login
+              </Link>
             </small>
           </p>
           <SocialLogin></SocialLogin>
