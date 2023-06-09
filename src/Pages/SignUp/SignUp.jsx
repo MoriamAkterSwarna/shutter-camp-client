@@ -27,21 +27,16 @@ const SignUp = () => {
       const name = data.name;
       const email = data.email;
       const password = data.password;
-      const photo = data.photoUrl;
+      const photo = data.photo;
       console.log(name, email, password, photo);
 
       createUser(email, password, name, photo)
       .then((result) => {
         const createdUser = result.user;
-        // axios
-        //   .post("http://localhost:5000/jwt", { email: data.email })
-        //   .then((data) => {
-        //     //   console.log(data.data.jsonToken);
-        //     const token = data.data.jsonToken
-        //     localStorage.setItem("access-token", data.data.jsonToken);
+        
             updateUserProfile(data.name, data.photo);
 
-            const savedUser = { name: data.name, email: data.email };
+            const savedUser = { name: data.name, email: data.email, photoURL:data.photo, role: 'student' };
             console.log(savedUser);
             fetch("http://localhost:5000/users", {
               method: "POST",
@@ -156,7 +151,7 @@ const SignUp = () => {
             <div className="form-control">
               <input
                 type="text"
-                {...register("photoUrl", { required: true })}
+                {...register("photo", { required: true })}
                 placeholder="Photo URL"
                 className="input input-bordered"
               />

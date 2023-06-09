@@ -16,50 +16,40 @@ const SocialLogin = () => {
     .then((result) => {
       const loggedInUser = result.user;
       console.log(loggedInUser);
+      const savedUser = { name: loggedInUser.displayName, email: loggedInUser.email, photoURL:loggedInUser.photoURL, role: 'student' };
+            console.log(savedUser);
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+               
+              },
+              body: JSON.stringify(savedUser),
+            })
 
-      toast('🦄 Log in Successfully!', {
-        position: "top-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-        setTimeout(() => {
-          navigate(from, {replace:true})
-        }, 4000);
-
+            .then(res => res.json())
+            .then(data => {
+              if(data.insertedId){
+                toast('🦄 Google Log in Successfully!', {
+                  position: "top-left",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  });
+                  setTimeout(() => {
+                    navigate(from, {replace:true})
+                  }, 3000);
+              }
+            })
     }
     
     );
-    
-    
   };
-  const handleGithubSignIn = () =>{
-    signInWithGithub()
-    .then(result => {
-        const loggedUser = result.user;
-        toast('🦄 Log in Successfully!', {
-          position: "top-left",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-          setTimeout(() => {
-            navigate(from, {replace:true})
-          }, 4000);
-
-        
-    })
-    .catch(error => console.log(error))
-
-}
+  
   return (
     <div>
       <div className="divider"></div>
@@ -67,9 +57,7 @@ const SocialLogin = () => {
         <button className="btn btn-circle bg-emerald-500 border-none hover:bg-emerald-700 mr-2">
           <FaGoogle onClick={handleGoogleSignIn} className="text-white text-xl"></FaGoogle>
         </button>
-        <button className="btn btn-circle bg-emerald-500 hover:bg-emerald-700 border-none">
-          <FaGithub onClick={handleGithubSignIn} className="text-white text-xl"></FaGithub>
-        </button>
+        
       </div>
       <ToastContainer></ToastContainer>
     </div>

@@ -8,8 +8,8 @@ const ManageClasses = () => {
         return res.json();
       });
       console.log(classes)
-      const handleMakePending = clss =>{
-        fetch(`http://localhost:5000//classes/approve/${clss._id}`, {
+      const handleMakeApprove = clss =>{
+        fetch(`http://localhost:5000/classes/${clss._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -20,7 +20,7 @@ const ManageClasses = () => {
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: `${user.name} is an admin now`,
+            title: ` approved now!!`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -52,27 +52,18 @@ const ManageClasses = () => {
                 <td>{clss.cName}</td>
                 <td>{clss.seats}</td>
                 <td>{clss.price}</td>
-                <td>{clss.status === "pending" ? <span className=" text-emerald-500 font-semibold">Pending</span> : <button
-                    onClick={() => handleMakePending(clss)}
-                    className="btn bg-emerald-400 text-white hover:bg-emerald-600"
-                  >
-                    Pending
-                  </button>}
-                  
-                  </td>
-                  <td>{clss.role === "approve" ? <span className="btn text-emerald-500 font-semibold">Approve</span> : <button
+                <td>{clss.status === "approve" ? <span className="text-emerald-500 font-semibold">Approved</span> : <button
                     onClick={() => handleMakeApprove(clss)}
                     className="btn bg-emerald-400 text-white hover:bg-emerald-600"
-                    
                   >
                     Approve
                   </button>}</td>
-                <td>{clss.role === "deny" ? <span className="btn text-emerald-500 font-semibold">Deny</span> : <button
+                
+                <td>{clss.status === "deny" ? <span className="text-emerald-500 font-semibold">Denied</span> : <button
                     onClick={() => handleMakeDeny(clss)}
                     className="btn bg-emerald-400 text-white hover:bg-emerald-600"
                   >
                     Deny
-                    
                   </button>}</td>
                 
                 

@@ -42,11 +42,7 @@ const Dashboard = () => {
             {/* admin dashboard */}
             {isAdmin ?  
               <>
-                <li>
-                  <NavLink className="hover:bg-emerald-700 hover:text-white">
-                    <FaHome></FaHome>Admin Home
-                  </NavLink>
-                </li>
+              
                 <li className="mt-2">
                   <NavLink to='/dashboard/manageclasses' className="btn-neutral hover:bg-emerald-700 hover:text-white">
                     <SiGoogleclassroom></SiGoogleclassroom> Manage Class
@@ -120,12 +116,12 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li className="mt-2">
-              <NavLink className="hover:bg-emerald-700 hover:text-white">
+              <NavLink to='/instructors' className="btn-neutral hover:bg-emerald-700 hover:text-white">
                 <FaChalkboardTeacher></FaChalkboardTeacher>Instructors
               </NavLink>
             </li>
             <li className="mt-2">
-              <NavLink className="hover:bg-emerald-700 hover:text-white">
+              <NavLink to='/class' className="btn-neutral hover:bg-emerald-700 hover:text-white">
                 {" "}
                 <SiGoogleclassroom></SiGoogleclassroom> Classes
               </NavLink>

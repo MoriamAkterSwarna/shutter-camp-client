@@ -67,10 +67,10 @@ const NavigationBar = () => {
           </li>
 
           <li>
-          <Link to='/'>Instructors</Link>
+          <Link to='/instructors'>Instructors</Link>
           </li>
           <li>
-            <Link to='/'>Classes</Link>
+            <Link to='/class'>Classes</Link>
             </li>
             {
               user && <li>
