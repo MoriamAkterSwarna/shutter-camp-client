@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaChalkboardTeacher, FaHome, FaUser, FaUsers } from "react-icons/fa";
+import { FaChalkboardTeacher, FaHome, FaUsers } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import {
   MdAssignmentAdd,
@@ -15,11 +15,10 @@ import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
   
   const [isAdmin] = useAdmin();
-  console.log(isAdmin)
+  // console.log(isAdmin)
 
-  // console.log(isAdmin);
   const [isInstructor] = useInstructor();
-  console.log(isInstructor)
+  // console.log(isInstructor)
 
   return (
     <div>
@@ -41,7 +40,7 @@ const Dashboard = () => {
             {/* Sidebar content here */}
 
             {/* admin dashboard */}
-            {isAdmin && (
+            {isAdmin ?  
               <>
                 <li>
                   <NavLink className="hover:bg-emerald-700 hover:text-white">
@@ -49,7 +48,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li className="mt-2">
-                  <NavLink className="hover:bg-emerald-700 hover:text-white">
+                  <NavLink to='/dashboard/manageclasses' className="btn-neutral hover:bg-emerald-700 hover:text-white">
                     <SiGoogleclassroom></SiGoogleclassroom> Manage Class
                   </NavLink>
                 </li>
@@ -62,10 +61,10 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
               </>
-            )}
-            {/* instructor dashboard */}
-
-            {isInstructor && isInstructor ? (
+            
+           
+            : isInstructor ?
+             
               <>
                 <li className="mt-2">
                   <NavLink
@@ -84,7 +83,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
               </>
-            ) : (
+             : 
               <>
                 {/* student dashboard */}
                 <li className="mt-2">
@@ -109,7 +108,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
               </>
-            )}
+            }
 
             <div className="divider"></div>
             <li className="mt-2">

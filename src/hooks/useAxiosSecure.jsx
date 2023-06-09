@@ -14,9 +14,9 @@ const {logOut} = useContext(AuthContext)
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
-      const token = localStorage.getItem('access-token');
+      const token =  localStorage.getItem('access-token');
       if (token) {
-        console.log(config.headers.Authorization)
+        //  console.log(config.headers.Authorization)
         config.headers.Authorization = `Bearer ${token}`;
       }
       return config;

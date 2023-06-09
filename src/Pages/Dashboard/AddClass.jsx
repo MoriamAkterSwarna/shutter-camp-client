@@ -5,10 +5,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 
-const image_token = import.meta.env.VITE_imageHostingKey;
-// console.log(image_token)
+const image_token = import.meta.env.VITE_Image_Upload_token;
+
 const AddClass = () => {
-  // console.log(image_token)
+  console.log(image_token)
   const { user } = useContext(AuthContext);
   // console.log({user})
   const [axiosSecure] = useAxiosSecure();
@@ -16,19 +16,43 @@ const AddClass = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${image_token}`;
   console.log(img_hosting_url);
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log(data);
     console.log(data.image[0]);
+
     const formData = new FormData();
     formData.append("image", data.image[0]);
     console.log(formData);
 
-    fetch(`https://api.imgbb.com/1/upload?key=${image_token}`, {
+    fetch(img_hosting_url, {
       method: "POST",
-      body: formData,
+      body: formData
     })
       .then((res) => res.json())
-      .then((imgResponse) => console.log(imgResponse));
+      .then((imgResponse) => {console.log(imgResponse)
+        if(imgResponse.success){
+          const imgURL = imgResponse.data.display_url;
+          console.log(imgURL)
+          const {cName, price,instructorName,instructorEmail, seats, status} = data;
+          const newClasses = {cName,image:imgURL,instructorName,instructorEmail,seats:parseInt(seats), price: parseInt(price), status}
+          console.log(newClasses)
+          axiosSecure.post('/classes', newClasses)
+          .then(data => {
+              console.log('after posting new menu item', data.data)
+              if(data.data.insertedId){
+          //         reset();
+                  Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'Item added successfully',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+              }
+          })
+      }
+    }
+      );
   };
   return (
     <div>

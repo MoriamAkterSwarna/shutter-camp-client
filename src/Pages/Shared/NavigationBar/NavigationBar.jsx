@@ -13,7 +13,7 @@ const NavigationBar = () => {
 }
   return (
     <div className="navbar bg-emerald-50 rounded-sm">
-      <div className="navbar-start">
+      <div >
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -60,7 +60,7 @@ const NavigationBar = () => {
           />
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className=" hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
           <Link to='/'>Home</Link>
@@ -91,7 +91,7 @@ const NavigationBar = () => {
          <div className="flex items-center">
          <span>
             {
-              user &&  ( <img src={user?.photoURL} title={user?.displayName} className='rounded-full w-20 mr-2' alt=""/>)
+              user &&  ( <img src={user?.photoURL} title={user?.displayName} className='rounded-full w-20 mr-2' alt="user image"/>)
             }
           </span>
         <Link
