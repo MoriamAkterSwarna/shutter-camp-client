@@ -33,21 +33,21 @@ const SignUp = () => {
       createUser(email, password, name, photo)
       .then((result) => {
         const createdUser = result.user;
-        axios
-          .post("http://localhost:5000/jwt", { email: data.email })
-          .then((data) => {
-            //   console.log(data.data.jsonToken);
-            const token = data.data.jsonToken
-            localStorage.setItem("access-token", data.data.jsonToken);
-            updateUserProfile(name, photo);
+        // axios
+        //   .post("http://localhost:5000/jwt", { email: data.email })
+        //   .then((data) => {
+        //     //   console.log(data.data.jsonToken);
+        //     const token = data.data.jsonToken
+        //     localStorage.setItem("access-token", data.data.jsonToken);
+            updateUserProfile(data.name, data.photo);
 
-            const savedUser = { name: name, email: email };
+            const savedUser = { name: data.name, email: data.email };
             console.log(savedUser);
             fetch("http://localhost:5000/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
-                authorization: token,
+                // authorization: token,
               },
               body: JSON.stringify(savedUser),
             })
@@ -71,10 +71,10 @@ const SignUp = () => {
                 }
               });
           });
-        console.log(createdUser);
-      })
+        // console.log(createdUser);
+      // })
 
-      .catch((error) => console.log(error));
+      // .catch((error) => console.log(error));
   }
 };
 

@@ -1,21 +1,22 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-
 
 const axiosSecure = axios.create({
   baseURL: 'http://localhost:5000', 
 });
 
 const useAxiosSecure = () => {
-  const { logOut } = useContext(AuthContext)
+const {logOut} = useContext(AuthContext)
   const navigate = useNavigate(); 
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem('access-token');
       if (token) {
+        console.log(config.headers.Authorization)
         config.headers.Authorization = `Bearer ${token}`;
       }
       return config;

@@ -65,7 +65,7 @@ const Dashboard = () => {
             )}
             {/* instructor dashboard */}
 
-            {isInstructor && isInstructor? (
+            {isInstructor && isInstructor ? (
               <>
                 <li className="mt-2">
                   <NavLink
