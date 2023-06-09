@@ -3,8 +3,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import axios from "axios";
-
+import { Fade, Slide } from "react-awesome-reveal";
 const image_token = import.meta.env.VITE_Image_Upload_token;
 
 const AddClass = () => {
@@ -55,7 +54,12 @@ const AddClass = () => {
       );
   };
   return (
-    <div>
+    <div className="my-10">
+      <Slide>
+          <h3 className="text-3xl font-semibold text-center text-emerald-500 mb-2"> Add a Class: </h3>
+      </Slide>
+
+      <Fade delay={1e3} cascade damping={1e-1}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 bg-emerald-50 p-8 gap-6"
@@ -149,6 +153,8 @@ const AddClass = () => {
           </div>
         </div>
       </form>
+      </Fade>
+      
     </div>
   );
 };

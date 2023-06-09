@@ -16,7 +16,7 @@ const SingleClass = ({classItem}) => {
       <div className="badge badge-outline ">Price: {price}</div>
     </div>
     <div className='mx-auto'>
-        <button className=' bg-emerald-500 px-6 py-3 rounded-3xl text-white mt-3'>Select</button>
+        <button className=' bg-emerald-500 px-6 py-3 rounded-3xl font-bold text-white mt-3'>Enroll</button>
     </div>
   </div>
 </div>

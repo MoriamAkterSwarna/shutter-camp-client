@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-
+import { Fade, Slide } from "react-awesome-reveal";
 
 const ManageClasses = () => {
     const { data: classes = [], refetch } = useQuery(["clsss"], async () => {
@@ -29,8 +29,11 @@ const ManageClasses = () => {
   };
       
     return (
-        <div className="bg-emerald-50 py-6 ml-0">
-      <h3 className="text-3xl font-semibold"> Total Classes: {classes.length}</h3>
+        <div className="bg-emerald-50 py-6 ml-0 px-4">
+          <Slide>
+          <h3 className="text-3xl font-semibold text-center text-emerald-500"> Total Classes: {classes.length}</h3>
+      </Slide>
+      <Fade delay={1e3} cascade damping={1e-1}>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -82,6 +85,8 @@ const ManageClasses = () => {
           </tbody>
         </table>
       </div>
+      </Fade>
+      
     </div>
     );
 };
