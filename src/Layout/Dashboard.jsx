@@ -83,7 +83,7 @@ const Dashboard = () => {
               <>
                 {/* student dashboard */}
                 <li className="mt-2">
-                  <NavLink to='/dashboard/selectedclasses' className="hover:bg-emerald-700 hover:text-white">
+                  <NavLink to='/dashboard/selectedclasses' className= "btn-neutral hover:bg-emerald-700 hover:text-white">
                     <BiSelectMultiple></BiSelectMultiple> My Selected Classes
                   </NavLink>
                 </li>
