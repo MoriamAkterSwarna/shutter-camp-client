@@ -8,7 +8,7 @@ import banner2 from '../../../assets/bannerImage/camera-photographic-with-smartp
 import banner3 from '../../../assets/bannerImage/portrait-smiling-girl-looking-camera-against-blue-backdrop.jpg'
 import banner4 from '../../../assets/bannerImage/preschooler-boy-taking-pictures-with-professional-photo-camera-isolated-grey-background.jpg'
 import banner5 from '../../../assets/bannerImage/side-view-girl-with-camera.jpg'
-import './Slider.css'
+
 const Slider = () => {
     return (
         <AwesomeSlider animation="cubeAnimation" className='h-[500px] mb-20'>

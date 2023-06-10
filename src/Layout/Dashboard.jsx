@@ -72,7 +72,7 @@ const Dashboard = () => {
                 </li>
                 <li className="mt-2">
                   <NavLink
-                    to="/"
+                    to="/dashboard/myclass"
                     className="btn-neutral hover:bg-emerald-700 hover:text-white"
                   >
                     <MdOutlineAddChart></MdOutlineAddChart>My classes
