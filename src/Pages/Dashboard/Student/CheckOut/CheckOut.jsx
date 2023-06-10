@@ -83,7 +83,7 @@ const CheckOut = ({ payable, price }) => {
       setTransactionId(paymentIntent.id);
 
       const payment = {
-      pay:{...payable},
+        pay: { ...payable },
         email: user?.email,
         transactionId: paymentIntent.id,
         price,
@@ -91,13 +91,9 @@ const CheckOut = ({ payable, price }) => {
       };
       axiosSecure.post("/payments", payment).then((res) => {
         // console.log();
-        console.log(res.data);
-        if (res.data.insertedId) {
-          Swal.fire(
-            'Good job!',
-            'Transaction successful!',
-            'success'
-          )
+        console.log(res.data.insertResult);
+        if (res.data.insertResult.insertedId) {
+          Swal.fire("Good job!", "Transaction successful!", "success");
         }
       });
     }
@@ -105,7 +101,7 @@ const CheckOut = ({ payable, price }) => {
 
   return (
     <>
-      <form className="payment-form p-4 m-8" onSubmit={handleSubmit}>
+      <form className="payment-form p-4 m-8 bg-emerald-100" onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
@@ -123,13 +119,19 @@ const CheckOut = ({ payable, price }) => {
           }}
         />
         <button
-          className="btn bg-emerald-500 hover:bg-emerald-700"
+          className="pay-btn btn bg-emerald-500 hover:bg-emerald-700"
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >
           Pay
         </button>
       </form>
+      {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
+      {transactionId && (
+        <p className="text-emerald-500 font-semibold">
+          Transaction complete with transactionId: {transactionId}
+        </p>
+      )}
     </>
   );
 };

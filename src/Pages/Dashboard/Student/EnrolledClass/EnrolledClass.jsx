@@ -20,7 +20,7 @@ const EnrolledClass = () => {
     return (
         <div>
             <Slide>
-                    <h3 className="text-3xl font-semibold text-emerald-500 text-center" > Enrolled Classes: </h3>
+                    <h3 className="text-3xl font-semibold text-emerald-500 text-center" > Enrolled Classes:{enroll.length} </h3>
                     </Slide>
 
                     <Bounce delay={1e3} cascade damping={1e-1}>
