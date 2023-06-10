@@ -51,8 +51,8 @@ const MyClasses = () => {
                 <td>{mycls.price}</td>
                 <td>{mycls.status}</td>
                 <td>0</td>
-                <td><button className="bg-orange-300 px-2 py-1 rounded-sm"><FcFeedback className="text-2xl"></FcFeedback></button></td>
-                <td><button className="bg-emerald-600 px-2 py-1 rounded-lg"><GrDocumentUpdate className="text-xl"></GrDocumentUpdate></button></td>
+                <td><button className="bg-orange-300 hover:bg-orange-500 px-2 py-1 rounded-sm"><FcFeedback className="text-2xl"></FcFeedback></button></td>
+                <td><button className="bg-orange-400 hover:bg-orange-600 px-3 py-2 rounded-sm"><GrDocumentUpdate className="text-xl"></GrDocumentUpdate></button></td>
                 
               </tr>
             ))}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useSelectedClasses from '../../../../hooks/useSelectedClasses';
 import {  TiDeleteOutline } from 'react-icons/ti';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
 const SelectedClass = () => {
@@ -10,7 +11,7 @@ const SelectedClass = () => {
     console.log(selected)
 
     const handleDelete =selectedCls  => {
-      console.log(selectedCls)
+      // console.log(selectedCls)
       Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -67,7 +68,7 @@ const SelectedClass = () => {
                     <td>{selectedCls.price}</td>
                     <td>{selectedCls.seat}</td>
                     <td><button onClick={()=>handleDelete(selectedCls)}><TiDeleteOutline className='text-2xl text-rose-600'></TiDeleteOutline></button></td>
-                    <td ><button className='uppercase btn bg-teal-600 text-white px-5'>Pay</button></td>
+                    <td> <Link to={`/dashboard/payments/${selectedCls._id}`}><button className='uppercase btn bg-teal-600 text-white px-5'>Pay</button></Link></td>
                   </tr>))
             }
       

@@ -95,14 +95,7 @@ const Dashboard = () => {
                     <MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes
                   </NavLink>
                 </li>
-                <li className="mt-2">
-                  <NavLink
-                    to="/"
-                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
-                  >
-                    <MdPayments></MdPayments> Payment
-                  </NavLink>
-                </li>
+                
               </>
             }
 
