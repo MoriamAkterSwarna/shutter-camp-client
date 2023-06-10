@@ -89,7 +89,7 @@ const Dashboard = () => {
                 </li>
                 <li className="mt-2">
                   <NavLink
-                    to="/"
+                    to="/dashboard/enrolledclasses"
                     className="btn-neutral hover:bg-emerald-700 hover:text-white"
                   >
                     <MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes
