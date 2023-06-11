@@ -2,18 +2,39 @@ import React, { useContext } from "react";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
-const NavigationBar = () => {
-  const {user, logOut,updateUserProfile} = useContext(AuthContext);
-  // console.log(user)
+import { BsFillCloudSunFill, BsFillMoonFill } from "react-icons/bs";
+import { useState } from "react";
+import { useEffect } from "react";
 
+const NavigationBar = () => {
+  const { user, logOut, updateUserProfile } = useContext(AuthContext);
+  // console.log(user)
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+  );
+
+  // update state on toggle
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("black");
+    } else {
+      setTheme("light");
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    // add custom data-theme attribute to html tag required to update theme using DaisyUI
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
   const handleLogOut = () => {
     logOut()
-        .then(() => { })
-        .catch(error => console.log(error));
-}
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="navbar bg-emerald-50 rounded-sm">
-      <div >
+      <div>
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -36,20 +57,20 @@ const NavigationBar = () => {
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to='/'>Home</Link>
+              <Link to="/">Home</Link>
             </li>
 
             <li>
-            <Link  to='/'>Instructors</Link>
+              <Link to="/">Instructors</Link>
             </li>
             <li>
-            <Link to='/'>Classes</Link>
+              <Link to="/">Classes</Link>
             </li>
-            {
-              user && <li>
-              <Link to='/dashboard'>Dashboard</Link>
+            {user && (
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
-            }
+            )}
           </ul>
         </div>
         <Link to="/" className="ps-10">
@@ -63,24 +84,46 @@ const NavigationBar = () => {
       <div className=" hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-          <Link to='/'>Home</Link>
+            <Link to="/">Home</Link>
           </li>
 
           <li>
-          <Link to='/instructors'>Instructors</Link>
+            <Link to="/instructors">Instructors</Link>
           </li>
           <li>
-            <Link to='/class'>Classes</Link>
+            <Link to="/class">Classes</Link>
+          </li>
+          {user && (
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
-            {
-              user && <li>
-              <Link to='/dashboard'>Dashboard</Link>
-              </li>
-            }
+          )}
         </ul>
       </div>
+
       <div className="navbar-end">
+        <div className="">
+          <button className="btn btn-ghost rounded-full">
+            <label className="swap swap-rotate">
+              <input
+                className="w-12 btn-ghost"
+                type="checkbox"
+                onChange={handleToggle}
+                // show toggle image based on localstorage theme
+                checked={theme === "light" ? false : true}
+              />
+              {/* light theme sun image */}
+              <BsFillCloudSunFill className="w-8 h-8 swap-on"></BsFillCloudSunFill>
         
+
+              {/* black theme moon image */}
+              <BsFillMoonFill className="w-8 h-8 swap-off"></BsFillMoonFill>
+              
+            </label>
+          </button>
+        </div>
+        <div className="flex items-center">
+        <div>
         {
             user ? <>
                 <button onClick={handleLogOut}  className=" btn btn-outline hover:bg-emerald-500 hover:outline-emerald-500 hover:border-none mr-3">LogOut</button>
@@ -88,6 +131,7 @@ const NavigationBar = () => {
                 <li ><Link  className=" btn btn-outline hover:bg-emerald-500 hover:outline-emerald-500 hover:border-none mr-3" to="/login">Login</Link></li>
             </>
         }
+        </div>
          <div className="flex items-center">
          <span>
             {
@@ -100,6 +144,7 @@ const NavigationBar = () => {
         >
           Sign Up
         </Link>
+        </div>
          </div>
       </div>
     </div>
