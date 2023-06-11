@@ -17,11 +17,15 @@ const SingleClass = ({classItem}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const cardStyle = {
+      backgroundColor: seats === 0 ? 'red' : 'initial'
+    };
     const handleSelect = (classItem) =>{
         // console.log(classItem);
-        if( seats === 0 || isAdmin || isInstructor){
+        if( isAdmin || isInstructor){
             setDisable(true);
         }
+        
         else{
             if( user && user?.email){
                 const selectedClass = {classId:_id, cName, image, instructorName,instructorEmail, price, seats, status, studentEmail: user?.email}
@@ -66,7 +70,7 @@ const SingleClass = ({classItem}) => {
         }
     
     return (
-        <div className="card w-96 bg-base-100 shadow-lg">
+        <div  style={cardStyle} className="card w-96 bg-base-100 shadow-lg">
   <figure><img src={image} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">

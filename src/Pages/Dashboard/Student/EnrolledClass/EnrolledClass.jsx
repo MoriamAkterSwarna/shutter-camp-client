@@ -16,7 +16,7 @@ const EnrolledClass = () => {
             // console.log(enrolledCls)
         setEnroll(enrolledCls)})
     },[enroll])
-    // console.log(enroll)
+    console.log(enroll)
     return (
         <div>
             <Slide>
@@ -34,7 +34,7 @@ const EnrolledClass = () => {
               <th>Instructor</th>
               <th>Price</th>
               <th>Transaction Id</th>
-              <th>Enrolled</th>
+              <th>Date</th>
               
             </tr>
           </thead>
@@ -47,7 +47,7 @@ const EnrolledClass = () => {
                 <td>{enrolItem.pay.instructorName}</td>
                 <td>{enrolItem.pay.price}</td>
                 <td>{enrolItem.transactionId}</td>
-                <td>0</td>
+                <td>{enrolItem.date}</td>
                 
               </tr>
             ))}

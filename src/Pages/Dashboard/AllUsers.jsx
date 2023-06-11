@@ -4,7 +4,9 @@ import { FaUserShield } from "react-icons/fa";
 import {  GiTeacher } from "react-icons/gi";
 import Swal from "sweetalert2";
 import { Fade, Slide } from "react-awesome-reveal";
+import { useState } from "react";
 const AllUsers = () => {
+  const [disable, setDisable] = useState(false)
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await fetch("http://localhost:5000/users");
     return res.json();
@@ -28,6 +30,7 @@ const AllUsers = () => {
           });
         }
       });
+      setDisable(true)
   };
   const handleMakeInstructor = (user) => {
     fetch(`http://localhost:5000/users/instructor/${user._id}`, {
@@ -47,6 +50,7 @@ const AllUsers = () => {
           });
         }
       });
+      setDisable(true)
   };
   return (
     <div>
@@ -75,14 +79,14 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role === "admin" ? <span className="text-emerald-500 font-semibold">Admin</span> : <button
-                    onClick={() => handleMakeAdmin(user)}
+                    onClick={() => handleMakeAdmin(user)} disabled={disable}
                     className="btn bg-emerald-400 text-white hover:bg-emerald-600"
                   >
                     <FaUserShield />
                   </button>}</td>
                 
                 <td>{user.role === "instructor" ? <span className="text-emerald-500 font-semibold">Instructor</span> : <button
-                    onClick={() => handleMakeInstructor(user)}
+                    onClick={() => handleMakeInstructor(user)} disabled={disable}
                     className="btn bg-emerald-400 text-white hover:bg-emerald-600"
                   >
                     <GiTeacher />
