@@ -7,7 +7,7 @@ import { AuthContext } from '../providers/AuthProvider';
 const useStudent = () => {
    const {user, loader} = useContext(AuthContext);
    const [axiosSecure] = useAxiosSecure();
-    const {data: isStudent, isLoading: isStudentLoading} = useQuery({
+    const {data: isStudent, isLoading: isStudentLoading, refetch} = useQuery({
         queryKey: ['isStudent', user?.email],
         enabled: !loader && !!user?.email,
         queryFn: async () => {
@@ -18,7 +18,7 @@ const useStudent = () => {
         
     })
     
-    return [isStudent, isStudentLoading]
+    return [isStudent, isStudentLoading, refetch]
 };
 
 export default useStudent;

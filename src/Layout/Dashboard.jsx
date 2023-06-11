@@ -1,12 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaChalkboardTeacher, FaHome, FaUsers } from "react-icons/fa";
+import { FaChalkboardTeacher, FaHome, FaMoneyCheckAlt, FaUsers } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import {
   MdAssignmentAdd,
   MdBookmarkAdded,
   MdOutlineAddChart,
-  MdPayments,
 } from "react-icons/md";
 import { BiSelectMultiple } from "react-icons/bi";
 
@@ -93,6 +92,14 @@ const Dashboard = () => {
                     className="btn-neutral hover:bg-emerald-700 hover:text-white"
                   >
                     <MdBookmarkAdded></MdBookmarkAdded>My Enrolled classes
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    to="/dashboard/payments"
+                    className="btn-neutral hover:bg-emerald-700 hover:text-white"
+                  >
+                     <FaMoneyCheckAlt></FaMoneyCheckAlt> Payments
                   </NavLink>
                 </li>
                 

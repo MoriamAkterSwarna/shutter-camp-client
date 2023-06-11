@@ -6,27 +6,13 @@ import { BsFillCloudSunFill, BsFillMoonFill } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
 
+
 const NavigationBar = () => {
   const { user, logOut, updateUserProfile } = useContext(AuthContext);
-  // console.log(user)
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
 
-  // update state on toggle
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("black");
-    } else {
-      setTheme("light");
-    }
-  };
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    // add custom data-theme attribute to html tag required to update theme using DaisyUI
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
+  // console.log(user)
+  
+  
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -34,6 +20,7 @@ const NavigationBar = () => {
   };
   return (
     <div className="navbar bg-emerald-50 rounded-sm">
+      
       <div>
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -102,26 +89,7 @@ const NavigationBar = () => {
       </div>
 
       <div className="navbar-end">
-        <div className="">
-          <button className="btn btn-ghost rounded-full">
-            <label className="swap swap-rotate">
-              <input
-                className="w-12 btn-ghost"
-                type="checkbox"
-                onChange={handleToggle}
-                // show toggle image based on localstorage theme
-                checked={theme === "light" ? false : true}
-              />
-              {/* light theme sun image */}
-              <BsFillCloudSunFill className="w-8 h-8 swap-on"></BsFillCloudSunFill>
         
-
-              {/* black theme moon image */}
-              <BsFillMoonFill className="w-8 h-8 swap-off"></BsFillMoonFill>
-              
-            </label>
-          </button>
-        </div>
         <div className="flex items-center">
         <div>
         {

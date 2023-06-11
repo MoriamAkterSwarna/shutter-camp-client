@@ -15,6 +15,10 @@ import SelectedClass from "../Pages/Dashboard/Student/SelectedClass/SelectedClas
 import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
 import Payments from "../Pages/Dashboard/Student/Payments/Payments";
 import EnrolledClass from "../Pages/Dashboard/Student/EnrolledClass/EnrolledClass";
+import PrivateRoutes from "./PrivateRoutes";
+import InstructorRoutes from "./InstructorRoutes";
+import PaymentInfo from "../Pages/Dashboard/PaymentInfo";
+
 
 
 
@@ -51,23 +55,23 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         children:[
             {
                 path: 'allusers',
-                element:<AllUsers></AllUsers>
+                element:<AdminRoutes><AllUsers></AllUsers></AdminRoutes>
             },
             {
                 path: 'manageclasses',
-                element: <ManageClasses></ManageClasses>
+                element: <AdminRoutes><ManageClasses></ManageClasses></AdminRoutes>
             },
             {
                 path: 'addclass',
-                element: <AddClass></AddClass>
+                element: <InstructorRoutes><AddClass></AddClass></InstructorRoutes>
             },
             {
                 path: 'myclass',
-                element: <MyClasses></MyClasses>
+                element: <InstructorRoutes><MyClasses></MyClasses></InstructorRoutes>
             },
             {
                 path: 'selectedclasses',
@@ -80,7 +84,12 @@ export const router = createBrowserRouter([
             {
                 path:'enrolledclasses',
                 element: <EnrolledClass></EnrolledClass>
+            },
+            {
+                path: 'payments',
+                element: <PaymentInfo></PaymentInfo>
             }
+            
         ]
        
     }
