@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], refetch } = useQuery(["clsss"], async () => {
-    const res = await fetch("http://localhost:5000/classes");
+    const res = await fetch("https://shutter-camp-server.vercel.app/classes");
     return res.json();
   });
 
@@ -48,7 +48,7 @@ const ManageClasses = () => {
  
   };
   const handleMakeApprove = (clss) => {
-    fetch(`http://localhost:5000/classes/${clss._id}`, {
+    fetch(`https://shutter-camp-server.vercel.app/classes/${clss._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

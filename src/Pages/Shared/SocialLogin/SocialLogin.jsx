@@ -18,7 +18,7 @@ const SocialLogin = () => {
       console.log(loggedInUser);
       const savedUser = { name: loggedInUser.displayName, email: loggedInUser.email, photoURL:loggedInUser.photoURL, role: 'student' };
             console.log(savedUser);
-            fetch("http://localhost:5000/users", {
+            fetch("https://shutter-camp-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

@@ -41,7 +41,7 @@ const SingleClass = ({classItem}) => {
             if( user && user?.email){
                 const selectedClass = {classId:_id, cName, image, instructorName,instructorEmail, price, seats, status, studentEmail: user?.email}
                 // console.log(selectedClass)
-                fetch('http://localhost:5000/selected', {
+                fetch('https://shutter-camp-server.vercel.app/selected', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

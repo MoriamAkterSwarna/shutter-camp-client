@@ -11,7 +11,7 @@
 //   const navigate = useNavigate(); 
 
 //   const axiosSecure = axios.create({
-//     baseURL: 'http://localhost:5000', 
+//     baseURL: 'https://shutter-camp-server.vercel.app', 
 //   });
 
 //   useEffect(() => {
@@ -49,7 +49,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'https://shutter-camp-server.vercel.app', 
 });
 
 const 
@@ -64,7 +64,7 @@ useAxiosSecure = () => {
       const token = localStorage.getItem('access-token');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-        // console.log(config.headers.Authorization)
+        // console.log(config.headers)
       }
       return config;
     });

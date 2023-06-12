@@ -4,7 +4,7 @@ import SingleClass from '../SingleClass/SingleClass';
 const Classes = () => {
     const [showClasses, setShowClasses] = useState([])
     useEffect(() =>{
-        fetch(`http://localhost:5000/classes`)
+        fetch(`https://shutter-camp-server.vercel.app/classes`)
         .then(res => res.json())
         .then(data => {
             const classes = data.filter(cls => cls.status=== 'approve')

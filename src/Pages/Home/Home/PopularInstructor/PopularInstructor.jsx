@@ -6,7 +6,7 @@ import SinglePopularInstructor from "./SinglePopularInstructor";
 const PopularInstructor = () => { 
     const [popularInstructor, setPopularInstructor] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/popularinstructor')
+        fetch('https://shutter-camp-server.vercel.app/popularinstructor')
         .then(res => res.json())
         .then(data => {
             console.log(data);

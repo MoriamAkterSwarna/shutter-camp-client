@@ -9,7 +9,7 @@ const MyClasses = () => {
   const [feedbackData, setFeedbackData] = useState(null);
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://shutter-camp-server.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

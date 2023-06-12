@@ -12,7 +12,7 @@ const PaymentInfo = () => {
 
   useEffect(()=>{
     let isMounted = true;
-    fetch('http://localhost:5000/payments')
+    fetch('https://shutter-camp-server.vercel.app/payments')
     .then(res => res.json())
     .then(data =>{
       // console.log(data)
