@@ -11,4 +11,4 @@
 - In Navigation menu there is a classes section where all the approved classes by admin is showing. And In Instructor part all the instructor added by the admin will show in card. 
 
 ## Technologies: React Hook Form, Axios, Tanstack query, AOS, Stripe,  React awesome reveal, React awesome Slider, Firebase, MongoDb, React Icon, React Toastify, SweetAlert2
-### Live Site link: 
+### Live Site link: https://shutter-camp.web.app/
