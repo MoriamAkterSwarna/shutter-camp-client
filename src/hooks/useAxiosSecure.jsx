@@ -1,23 +1,70 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// import { useContext } from 'react';
+// import { AuthContext } from '../providers/AuthProvider';
+
+
+
+// const useAxiosSecure = () => {
+// const {logOut} = useContext(AuthContext)
+//   const navigate = useNavigate(); 
+
+//   const axiosSecure = axios.create({
+//     baseURL: 'http://localhost:5000', 
+//   });
+
+//   useEffect(() => {
+//     axiosSecure.interceptors.request.use((config) => {
+//       const token =  localStorage.getItem('access-token');
+//       if (token) {
+//         //  console.log(config.headers.Authorization)
+//         config.headers.Authorization = `Bearer ${token}`;
+//       }
+//       return config;
+//     });
+
+//     axiosSecure.interceptors.response.use(
+//       (response) => response,
+//       async (error) => {
+//         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+//           await logOut();
+//           navigate('/login');
+//         }
+//         return Promise.reject(error);
+//       }
+//     );
+//   }, [logOut, navigate]);
+
+//   return [axiosSecure];
+// };
+
+// export default useAxiosSecure;
+import {  useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
+
+
+
 
 const axiosSecure = axios.create({
   baseURL: 'http://localhost:5000', 
 });
 
-const useAxiosSecure = () => {
-const {logOut} = useContext(AuthContext)
+const 
+useAxiosSecure = () => {
+  const {logOut} = useContext(AuthContext)
   const navigate = useNavigate(); 
+
+
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
-      const token =  localStorage.getItem('access-token');
+      const token = localStorage.getItem('access-token');
       if (token) {
-        //  console.log(config.headers.Authorization)
         config.headers.Authorization = `Bearer ${token}`;
+        // console.log(config.headers.Authorization)
       }
       return config;
     });
@@ -32,7 +79,7 @@ const {logOut} = useContext(AuthContext)
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate]);
+  }, [logOut, navigate, axiosSecure]);
 
   return [axiosSecure];
 };

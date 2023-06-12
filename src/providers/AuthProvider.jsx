@@ -52,18 +52,21 @@ const AuthProvider = ({children}) => {
         const unsubscribe =  onAuthStateChanged(auth,currentUser=>{
             setUser(currentUser);
             console.log('current user',currentUser)
+            
             if(currentUser){
-                axios.post('http://localhost:5000/jwt',{email: currentUser.email})
-                .then(data =>{
-                  // console.log(data.data.jsonToken);
-                  localStorage.setItem('access-token', data.data.jsonToken)
-                  setLoader(false);
-                })
-                // setLoader(false);
-              }
-              else{
-                localStorage.removeItem('access-token')
-              }
+              axios.post('http://localhost:5000/jwt',{email:currentUser.email.toLocaleLowerCase()})
+              .then(data=>{
+                console.log(data.data.jsonToken);
+               if(data.data){
+                localStorage.setItem('access-token',data.data.jsonToken)
+                setLoader(false)
+               }
+             
+              })
+             }else{
+              localStorage.removeItem('access-token')  
+              setLoader(false)
+             }
   
             
         })
