@@ -5,11 +5,12 @@ import PopularInstructor from './PopularInstructor/PopularInstructor';
 import Feedback from './Feedback/Feedback';
 
 
+
 const Home = () => {
     
 
     return (
-        <div>
+        <div >
             
             <Slider></Slider>
             <PopularClasses></PopularClasses>

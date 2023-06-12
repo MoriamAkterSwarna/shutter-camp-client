@@ -1,20 +1,52 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Fade, Slide } from "react-awesome-reveal";
-import { Controller, useForm } from "react-hook-form";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageClasses = () => {
-  const { control, handleSubmit } = useForm();
+  const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], refetch } = useQuery(["clsss"], async () => {
     const res = await fetch("http://localhost:5000/classes");
     return res.json();
   });
-  console.log(classes);
 
-  const onSubmit= (data) =>{
-    console.log(data)
-  }
 
+  const  handleMakeDeny= (clss) => {
+    
+    Swal.fire({
+      title: "Send Feedback",
+      icon: "info",
+      html: '<input type="text" id="feedbackInput" placeholder="Enter your feedback" class="input bg-emerald-300 w-full max-w-xs border-error">',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText: "Send",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const feedback = document.getElementById("feedbackInput").value;
+        console.log(feedback)
+
+        axiosSecure
+          .put(`/classes/${clss._id}`, { feedback })
+          .then((res) => {
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                icon: "success",
+                title: "Class Denied Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.error("Error sending feedback:", error);
+          });
+      }
+    });
+ 
+  };
   const handleMakeApprove = (clss) => {
     fetch(`http://localhost:5000/classes/${clss._id}`, {
       method: "PATCH",
@@ -22,7 +54,7 @@ const ManageClasses = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
-        if (data.modifiedCount) {
+        if (data.modifiedCount > 0) {
           refetch();
           Swal.fire({
             position: "top-center",
@@ -34,12 +66,11 @@ const ManageClasses = () => {
         }
       });
   };
-
+ 
   return (
     <div className="bg-emerald-50 py-6 ml-0 px-4">
       <Slide>
         <h3 className="text-3xl font-semibold text-center text-emerald-500">
-          {" "}
           Total Classes: {classes.length}
         </h3>
       </Slide>
@@ -72,7 +103,7 @@ const ManageClasses = () => {
                     <td>{clss.price}</td>
                     <td>{clss.status}</td>
                     <td>
-                      {clss.status === "approve" ? (
+                      {clss.status === "approved" ? (
                         <span className="text-emerald-500 font-semibold">
                           Approved
                         </span>
@@ -87,51 +118,21 @@ const ManageClasses = () => {
                     </td>
 
                     <td>
-                      {
-                        clss.status === "deny" ? (
-                          <span className="text-emerald-500 font-semibold">
-                            Denied
-                          </span>
-                        ) : (
-                          <label
-                            htmlFor="my_modal_6"
-                            className="btn bg-emerald-400 text-white hover:bg-emerald-600"
-                          >
-                            Deny
-                          </label>
-                        )
-                      }
+                      {clss.status === "denied" ? (
+                        <span className="text-emerald-500 font-semibold">
+                          Denied
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => handleMakeDeny(clss)}
+                          className="btn bg-emerald-400 text-white hover:bg-emerald-600"
+                        >
+                          Deny
+                        </button>
+                      )}
                     </td>
 
-                    <input
-                      type="checkbox"
-                      id="my_modal_6"
-                      className="modal-toggle"
-                    />
-                    <div className="modal">
-                      <div className="modal-box">
-                        <form 
-                        onSubmit={handleSubmit(onSubmit)}
-                        >
-                          <Controller 
-                            name="myTextarea" 
-                            control={control}
-                            defaultValue="" 
-                            render={({ field }) => (
-                              <textarea {...field} className="border w-full h-32"/> 
-                            )}
-                          />
-                          
-                        </form>
-                        <div className="modal-action">
-                          <label type="submit" 
-                          htmlFor="my_modal_6"
-                           className="btn bg-emerald-500 hover:bg-emerald-700">
-                            Close!
-                          </label>
-                        </div>
-                      </div>
-                    </div>
+                   
                   </tr>
                 ))}
 

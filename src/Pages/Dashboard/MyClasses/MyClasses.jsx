@@ -6,6 +6,7 @@ import { GrDocumentUpdate } from 'react-icons/gr';
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
+
   const [classes, setClasses] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/classes")

@@ -5,11 +5,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 const SocialLogin = () => {
-  const { signInWithGoogle,signInWithGithub } = useContext(AuthContext);
+  const { signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/";
+
+  
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
@@ -41,7 +41,7 @@ const SocialLogin = () => {
                   theme: "light",
                   });
                   setTimeout(() => {
-                    navigate(from, {replace:true})
+                    navigate('/')
                   }, 3000);
               }
             })

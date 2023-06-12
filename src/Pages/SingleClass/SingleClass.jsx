@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useSelectedClasses from '../../hooks/useSelectedClasses';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
-
+import { ToastContainer, toast } from "react-toastify";
 const SingleClass = ({classItem}) => {
     const [disable, setDisable] = useState(false);
     const [isAdmin] =useAdmin();
@@ -23,7 +23,18 @@ const SingleClass = ({classItem}) => {
     const handleSelect = (classItem) =>{
         // console.log(classItem);
         if( isAdmin || isInstructor){
+          toast('🦄 Admin or instructor can not select class!', {
+            position: "top-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
             setDisable(true);
+           
         }
         
         else{
@@ -86,6 +97,7 @@ const SingleClass = ({classItem}) => {
         <button onClick={()=>handleSelect(classItem)} disabled={disable} className=' bg-emerald-500 px-6 py-3 rounded-3xl font-bold text-white mt-3'>Select</button>
     </div>
   </div>
+  <ToastContainer></ToastContainer>
 </div>
     );
     }
