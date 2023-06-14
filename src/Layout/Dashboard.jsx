@@ -41,8 +41,7 @@ const Dashboard = () => {
             {/* admin dashboard */}
             {isAdmin ?  
               <>
-              
-                <li className="mt-2">
+               <li className="mt-2">
                   <NavLink to='/dashboard/manageclasses' className="btn-neutral hover:bg-emerald-700 hover:text-white">
                     <SiGoogleclassroom></SiGoogleclassroom> Manage Class
                   </NavLink>
@@ -55,11 +54,8 @@ const Dashboard = () => {
                     <FaUsers></FaUsers>Manage Users
                   </NavLink>
                 </li>
-              </>
-            
-           
-            : isInstructor ?
-             
+              </>           
+            : isInstructor ?           
               <>
                 <li className="mt-2">
                   <NavLink

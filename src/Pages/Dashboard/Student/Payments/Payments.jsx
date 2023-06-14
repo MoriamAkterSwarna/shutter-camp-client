@@ -13,19 +13,16 @@ const Payments = () => {
   const [payable, setPayable] = useState();
   
   const [selected] = useSelectedClasses();
-
   useEffect(() => {
     if (selected) {
       
       const classData = selected.filter((filClass) => filClass._id === id);
-      
       setMyData(classData);
     }
   }, [selected]);
   useEffect(() => {
     const payableData = myData.map((pay) => {
-      
-      setPayable(pay);
+     setPayable(pay);
     });
   }, [myData]);
   const price = parseFloat(payable?.price.toFixed(2));
