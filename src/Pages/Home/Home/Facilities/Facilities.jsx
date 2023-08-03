@@ -14,7 +14,7 @@ import { TbCertificate } from "react-icons/tb";
 import { Link } from "react-router-dom";
 const Facilities = () => {
   return (
-    <div className="my-10">
+    <div className="my-10 ">
       <div className="text-center my-4">
         <h2 className="text-5xl font-bold mx-auto text-emerald-500">
           Why Choose Shutter Camp
@@ -32,8 +32,8 @@ const Facilities = () => {
 
       {/* facilities section */}
 
-      <div className="shadow-2xl rounded-lg">
-        <div className=" mt-10  p-6 ">
+      <div className="shadow-2xl rounded-lg border border-gray-100 mt-4">
+        <div className="mt-10  p-6 ">
           {/* facilities list */}
           <ul className="list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <div className="flex items-center">
