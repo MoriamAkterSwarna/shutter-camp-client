@@ -1,5 +1,5 @@
 # Shutter Camp
-
+### Admin Email:sadia@bd.com Password: A12345#
 
 ## Features: 
 - I have authenticate in firebase for sign up and log in page and for a social login which is google login. From register page with email and name I have send photoURL also. Then stored all the logged in user in mongoDb. 
