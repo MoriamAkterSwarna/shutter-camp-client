@@ -10,6 +10,14 @@
   content: normal;
   object-fit: fill;
 }
+/* .clip-bg{
+  clip-path: polygon(50% 74%, 99% 45%, 100% 100%, 0 100%, 0 48%);
+  background-color: teal;
+  position: absolute;
+  bottom:0
+} */
+
+
 .active {
   @apply font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-emerald-400 mr-1;
 }

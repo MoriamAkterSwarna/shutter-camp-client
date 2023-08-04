@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import AwesomeSlider from "react-awesome-slider";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
-// import AwesomeSliderStyles from "react-awesome-slider/src/styled/fold-out-animation.scss";
 import { BsFillChatLeftQuoteFill } from "react-icons/bs";
 import img1 from "../../../../assets/feedbackimg/img1.jpg";
 import img2 from "../../../../assets/feedbackimg/img2.jpg";

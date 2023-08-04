@@ -1,4 +1,6 @@
-import React from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 import { AiFillSchedule, AiOutlineGlobal } from "react-icons/ai";
 import { BiTask } from "react-icons/bi";
 import {
@@ -13,8 +15,11 @@ import { MdFeedback, MdOutlineClass } from "react-icons/md";
 import { TbCertificate } from "react-icons/tb";
 import { Link } from "react-router-dom";
 const Facilities = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div className="my-10 ">
+    <div className="my-10 clip-bg">
       <div className="text-center my-4">
         <h2 className="text-5xl font-bold mx-auto text-emerald-500">
           Why Choose Shutter Camp
@@ -102,15 +107,18 @@ const Facilities = () => {
         </div>
 
         {/* facilities bg */}
-        <div className="p-10">
+        <div data-aos="fade-up" data-aos-duration="5000" className="p-10 ">
           <div className="facility-bg h-64 rounded-md pt-20 ps-10">
             <p className="text-xl mb-2">
               Unlock Your Photography Potential with Our Online <br /> Summer
               Camp Course!
             </p>
-            <Link className="btn bg-teal-500 border-none">See Courses</Link>
+            <Link to="/class" className="btn bg-teal-500 border-none">
+              See Courses
+            </Link>
           </div>
         </div>
+        
       </div>
     </div>
   );
