@@ -11,7 +11,7 @@
 //   const navigate = useNavigate(); 
 
 //   const axiosSecure = axios.create({
-//     baseURL: 'https://shutter-camp-server.vercel.app', 
+//     baseURL: 'https://shutter-camp-server-nine.vercel.app', 
 //   });
 
 //   useEffect(() => {
@@ -49,7 +49,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 
 const axiosSecure = axios.create({
-  baseURL: 'https://shutter-camp-server.vercel.app', 
+  baseURL: 'https://shutter-camp-server-nine.vercel.app', 
 });
 
 const 

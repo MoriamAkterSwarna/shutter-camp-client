@@ -22,7 +22,7 @@ const SelectedClass = () => {
           confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
           if (result.isConfirmed) {
-              fetch(`https://shutter-camp-server.vercel.app/selected/${selectedCls._id}`, {
+              fetch(`https://shutter-camp-server-nine.vercel.app/selected/${selectedCls._id}`, {
                   method: 'DELETE'
               })
                   .then(res => res.json())
@@ -42,7 +42,7 @@ const SelectedClass = () => {
 
     return (
         <div>
-            <h2 className='text-center text-3xl text-emerald-500 font-bold'>Selected Classes : {selected.length}</h2>
+            <h2 className='text-center text-3xl text-blue-500 font-bold'>Selected Classes : {selected.length}</h2>
 
             <div className="overflow-x-auto">
   <table className="table">

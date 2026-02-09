@@ -17,9 +17,8 @@ const SingleClass = ({classItem}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const cardStyle = {
-      backgroundColor: seats === 0 ? 'red' : 'initial'
-    };
+    // Remove hardcoded cardStyle for background color
+    const isFull = seats === 0;
     const handleSelect = (classItem) =>{
         // console.log(classItem);
         if( isAdmin || isInstructor){
@@ -41,7 +40,7 @@ const SingleClass = ({classItem}) => {
             if( user && user?.email){
                 const selectedClass = {classId:_id, cName, image, instructorName,instructorEmail, price, seats, status, studentEmail: user?.email}
                 // console.log(selectedClass)
-                fetch('https://shutter-camp-server.vercel.app/selected', {
+                fetch('https://shutter-camp-server-nine.vercel.app/selected', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -81,25 +80,37 @@ const SingleClass = ({classItem}) => {
         }
     
     return (
-        <div  style={cardStyle} className="card w-96 bg-base-100 shadow-lg">
-  <figure><img src={image} alt="Shoes" /></figure>
-  <div className="card-body">
-    <h2 className="card-title">
-      {cName}
-      <div className="badge badge-secondary">NEW</div>
-    </h2>
-    <p>Instructor: {instructorName}</p>
-    <div className="card-actions justify-end">
-      <div className="badge badge-outline bg-teal-500">Seat: {seats}</div> 
-      <div className="badge badge-outline ">Price: {price}</div>
-    </div>
-    <div className='mx-auto'>
-        <button onClick={()=>handleSelect(classItem)} disabled={disable} className=' bg-emerald-500 px-6 py-3 rounded-3xl font-bold text-white mt-3'>Select</button>
-    </div>
-  </div>
-  <ToastContainer></ToastContainer>
-</div>
+      <div
+        className={`w-full max-w-md bg-white rounded-2xl shadow-lg flex flex-col transition-shadow duration-300 border border-blue-100 hover:border-blue-300 ${isFull ? 'opacity-60 grayscale' : ''}`}
+      >
+        <div className="w-full h-48 bg-gray-100 rounded-t-2xl flex items-center justify-center overflow-hidden">
+          <img
+            src={image}
+            alt={cName}
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="p-5 flex flex-col flex-1">
+          <h2 className="font-bold text-lg md:text-xl text-blue-800 flex items-center gap-2">
+            {cName}
+            <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-fuchsia-100 text-fuchsia-600 font-semibold">NEW</span>
+          </h2>
+          <p className="text-gray-600 mt-1 mb-2 text-sm md:text-base">Instructor: <span className="font-medium text-blue-700">{instructorName}</span></p>
+          <div className="flex justify-between items-center mb-3 mt-2">
+            <span className="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold">Seat: {seats}</span>
+            <span className="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold">Price: {price}</span>
+          </div>
+          <button
+            onClick={() => handleSelect(classItem)}
+            disabled={disable || isFull}
+            className={`w-full bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-3xl font-bold text-white mt-auto transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed`}
+          >
+            Select
+          </button>
+        </div>
+        <ToastContainer />
+      </div>
     );
-    }
+}
 
 export default SingleClass;

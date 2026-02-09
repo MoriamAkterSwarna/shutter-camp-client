@@ -7,6 +7,8 @@ import { AuthContext } from "../../../providers/AuthProvider";
 const NavigationBar = () => {
   const { user, logOut } = useContext(AuthContext);
 
+  // Theme context removed (ThemeProvider/useTheme missing)
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // theme
   // const [theme,setTheme]=useState(localStorage.getItem('theme')? localStorage.getItem('theme'):'light')
@@ -30,14 +32,12 @@ const NavigationBar = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="navbar bg-emerald-100 rounded-sm z-10 flex mr-0 justify-between items-center">
+    <div className="navbar bg-gradient-to-r from-blue-200 via-blue-400 to-blue-700 bg-opacity-80 backdrop-blur-xl rounded-2xl shadow-lg z-20 flex mr-0 justify-between items-center px-4 py-2 border border-blue-100">
       <Link to="/" className="inline-flex items-center relative navbar-start">
-        <>
-          <img className="w-[90px] rounded-full" src={logo} alt="" />
-          <span className="title-text ml-2 text-2xl font-bold tracking-wide text-gray-800">
-            Shutter Camp
-          </span>
-        </>
+        <img className="w-14 h-14 rounded-xl shadow-md border-2 border-white" src={logo} alt="Logo" />
+        <span className="ml-3 text-2xl font-extrabold tracking-wide text-white drop-shadow-lg">
+          Shutter Camp
+        </span>
       </Link>
 
       {/* Mobile nav menu  */}
@@ -145,13 +145,13 @@ const NavigationBar = () => {
                     </Link>
                   ) : (
                     <Link
-                      className="btn bg-emerald-500 text-white border-none hover:bg-black hover:border-none mx-auto w-1/3 mt-2"
+                      className="btn bg-blue-500 text-white border-none hover:bg-black hover:border-none mx-auto w-1/3 mt-2"
                       to="login">
                       Login
                     </Link>
                   )}
                   <Link
-                    className="btn bg-emerald-500 text-white border-none hover:bg-black hover:border-none mx-auto w-1/3 mt-2"
+                    className="btn bg-blue-500 text-white border-none hover:bg-black hover:border-none mx-auto w-1/3 mt-2"
                     to="login">
                     Register
                   </Link>
@@ -198,41 +198,36 @@ const NavigationBar = () => {
           </li>
         )}
       </ul>
-      <div className="nav-end font-bold flex items-center">
-        <span>
-          {user && (
-            <img
-              src={user?.photoURL}
-              title={user?.displayName}
-              className="rounded-full w-20 mr-2"
-              alt=""
-            />
-          )}
-        </span>
-
-        <div className="hidden lg:block">
+      <div className="nav-end font-bold flex items-center gap-2">
+        {user && (
+          <img
+            src={user?.photoURL}
+            title={user?.displayName}
+            className="rounded-full w-12 h-12 border-2 border-white shadow-md mr-2 object-cover"
+            alt="User avatar"
+          />
+        )}
+        <div className="hidden lg:flex gap-2">
           {user ? (
-            <Link
-              className="btn bg-emerald-400 text-black hover:bg-emerald-600 hover:outline-emerald-600 hover:border-none mr-3"
-              onClick={handleLogOut}>
+            <button
+              className="px-5 py-2 rounded-lg bg-blue-900 text-white font-semibold shadow hover:bg-blue-800 transition-colors duration-200"
+              onClick={handleLogOut}
+            >
               Sign out
-            </Link>
+            </button>
           ) : (
             <Link
-              className="btn text-black bg-white hover:bg-emerald-500 hover:outline-emerald-500 hover:border-none mr-3"
-              to="/login">
+              className="px-5 py-2 rounded-lg bg-white text-blue-900 font-semibold shadow hover:bg-blue-200 transition-colors duration-200"
+              to="/login"
+            >
               Login
             </Link>
           )}
-
-          {user ? (
-            <Link className="hidden" to="/signup">
-              Sign Up
-            </Link>
-          ) : (
+          {!user && (
             <Link
-              className="btn bg-emerald-500 text-white border-none hover:bg-black hover:border-none"
-              to="/signup">
+              className="px-5 py-2 rounded-lg bg-blue-700 text-white font-semibold shadow hover:bg-blue-900 transition-colors duration-200"
+              to="/signup"
+            >
               Sign Up
             </Link>
           )}

@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [], refetch } = useQuery(["clsss"], async () => {
-    const res = await fetch("https://shutter-camp-server.vercel.app/classes");
+    const res = await fetch("https://shutter-camp-server-nine.vercel.app/classes");
     return res.json();
   });
 
@@ -16,7 +16,7 @@ const ManageClasses = () => {
     Swal.fire({
       title: "Send Feedback",
       icon: "info",
-      html: '<input type="text" id="feedbackInput" placeholder="Enter your feedback" class="input bg-emerald-300 w-full max-w-xs border-error">',
+      html: '<input type="text" id="feedbackInput" placeholder="Enter your feedback" class="input bg-blue-300 w-full max-w-xs border-error">',
       showCloseButton: true,
       showCancelButton: true,
       focusConfirm: false,
@@ -48,7 +48,7 @@ const ManageClasses = () => {
  
   };
   const handleMakeApprove = (clss) => {
-    fetch(`https://shutter-camp-server.vercel.app/classes/${clss._id}`, {
+    fetch(`https://shutter-camp-server-nine.vercel.app/classes/${clss._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -68,9 +68,9 @@ const ManageClasses = () => {
   };
  
   return (
-    <div className="bg-emerald-50 py-6 ml-0 px-4">
+    <div className="bg-blue-50 py-6 ml-0 px-4">
       <Slide>
-        <h3 className="text-3xl font-semibold text-center text-emerald-500">
+        <h3 className="text-3xl font-semibold text-center text-blue-500">
           Total Classes: {classes.length}
         </h3>
       </Slide>
@@ -104,13 +104,13 @@ const ManageClasses = () => {
                     <td>{clss.status}</td>
                     <td>
                       {clss.status === "approved" ? (
-                        <span className="text-emerald-500 font-semibold">
+                        <span className="text-blue-500 font-semibold">
                           Approved
                         </span>
                       ) : (
                         <button
                           onClick={() => handleMakeApprove(clss)}
-                          className="btn bg-emerald-400 text-white hover:bg-emerald-600"
+                          className="btn bg-blue-400 text-white hover:bg-blue-600"
                         >
                           Approve
                         </button>
@@ -119,13 +119,13 @@ const ManageClasses = () => {
 
                     <td>
                       {clss.status === "denied" ? (
-                        <span className="text-emerald-500 font-semibold">
+                        <span className="text-blue-500 font-semibold">
                           Denied
                         </span>
                       ) : (
                         <button
                           onClick={() => handleMakeDeny(clss)}
-                          className="btn bg-emerald-400 text-white hover:bg-emerald-600"
+                          className="btn bg-blue-400 text-white hover:bg-blue-600"
                         >
                           Deny
                         </button>

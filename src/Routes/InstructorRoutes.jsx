@@ -9,7 +9,7 @@ const InstructorRoutes = ({children}) => {
     const location = useLocation();
 
     if(loader || isInstructorLoading){
-        return <progress className=" mx-auto bg-emerald-600 progress w-96"></progress>
+        return <progress className=" mx-auto bg-blue-600 progress w-96"></progress>
     }
 
     if (user && isInstructor) {

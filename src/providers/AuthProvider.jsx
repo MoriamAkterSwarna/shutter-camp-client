@@ -53,8 +53,8 @@ const AuthProvider = ({children}) => {
             setUser(currentUser);
             console.log('current user',currentUser)
             
-            if(currentUser){
-              axios.post('https://shutter-camp-server.vercel.app/jwt',{email:currentUser.email.toLocaleLowerCase()})
+            if(currentUser && currentUser.email){
+              axios.post('https://shutter-camp-server-nine.vercel.app/jwt',{email:currentUser.email.toLocaleLowerCase()})
               .then(data=>{
                 console.log(data.data.jsonToken);
                if(data.data){

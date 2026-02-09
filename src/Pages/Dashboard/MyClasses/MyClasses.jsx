@@ -9,7 +9,7 @@ const MyClasses = () => {
   const [feedbackData, setFeedbackData] = useState(null);
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("https://shutter-camp-server.vercel.app/classes")
+    fetch("https://shutter-camp-server-nine.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -24,13 +24,13 @@ const MyClasses = () => {
   return (
     <div>
       <Slide>
-        <h3 className="text-3xl font-semibold text-emerald-500 text-center">
+        <h3 className="text-3xl font-semibold text-blue-500 text-center">
           {" "}
           Total Classes: {classes.length}
         </h3>
       </Slide>
       <Bounce delay={1e3} cascade damping={1e-1}>
-        <div className="overflow-x-auto bg-emerald-100 p-6 mt-4 rounded-lg border-2">
+        <div className="overflow-x-auto bg-blue-100 p-6 mt-4 rounded-lg border-2">
           <table className="table table-zebra">
             {/* head */}
             <thead>
@@ -81,11 +81,11 @@ const MyClasses = () => {
                       <div className="modal">
                         <div className="modal-box">
                           
-                          <p className="py-4 border-emerald-600 border-2 rounded-xl px-3">
+                          <p className="py-4 border-blue-600 border-2 rounded-xl px-3">
                           {feedbackData}
                           </p>
                           <div className="modal-action">
-                            <label htmlFor="my_modal_6" className="btn bg-emerald-500 hover:bg-emerald-700">
+                            <label htmlFor="my_modal_6" className="btn bg-blue-500 hover:bg-blue-700">
                               Close!
                             </label>
                           </div>

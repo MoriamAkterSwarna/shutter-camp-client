@@ -14,111 +14,94 @@ import { GiMaterialsScience } from "react-icons/gi";
 import { MdFeedback, MdOutlineClass } from "react-icons/md";
 import { TbCertificate } from "react-icons/tb";
 import { Link } from "react-router-dom";
+
 const Facilities = () => {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  const facilities = [
+    { icon: AiFillSchedule, text: "Flexible Learning Schedule" },
+    { icon: FaChalkboardTeacher, text: "Expert Instructors" },
+    { icon: MdOutlineClass, text: "Comprehensive Curriculum" },
+    { icon: BiTask, text: "Hands-on Practice" },
+    { icon: MdFeedback, text: "Feedback and Critique" },
+    { icon: FaUsers, text: "Peer Interaction" },
+    { icon: BsUniversalAccessCircle, text: "Lifetime Access to Course Materials" },
+    { icon: BsFillCalendar2RangeFill, text: "Suitable for All Skill Levels" },
+    { icon: FaMoneyCheckAlt, text: "Cost-effective Learning" },
+    { icon: FcSelfie, text: "Build a Portfolio" },
+    { icon: TbCertificate, text: "Certificate of Completion" },
+    { icon: FaSpaceAwesome, text: "Learning at Your Own Pace" },
+    { icon: FaIndustry, text: "Access to Industry Insights" },
+    { icon: GiMaterialsScience, text: "No Equipment Limitations" },
+    { icon: AiOutlineGlobal, text: "Global Learning Community" },
+  ];
+
   return (
-    <div className="my-10 clip-bg">
-      <div className="text-center my-4">
-        <h2 className="text-5xl font-bold mx-auto text-emerald-500">
-          Why Choose Shutter Camp
-        </h2>
-      </div>
-      <div className="text-center">
-        <p>
-          Discover the world of photography from the comfort of your own home
-          with our comprehensive online summer camp course. <br /> Whether
-          you're an enthusiastic beginner or a hobbyist looking to enhance{" "}
-          <br /> your skills, our expert instructors will guide you through a
-          journey of creativity and mastery.
-        </p>
-      </div>
+    <div className="py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12" data-aos="fade-up">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Why Choose <span className="text-blue-500">Shutter Camp</span>
+          </h2>
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            Discover the world of photography from the comfort of your own home
+            with our comprehensive online summer camp course. Whether
+            you're an enthusiastic beginner or a hobbyist looking to enhance
+            your skills, our expert instructors will guide you through a
+            journey of creativity and mastery.
+          </p>
+        </div>
 
-      {/* facilities section */}
-
-      <div className="shadow-2xl rounded-lg border border-gray-100 mt-4">
-        <div className="mt-10  p-6 ">
-          {/* facilities list */}
-          <ul className="list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <div className="flex items-center">
-              <AiFillSchedule className="w-8 h-8 mr-2 text-emerald-500"></AiFillSchedule>
-              <li>Flexible Learning Schedule</li>
-            </div>
-            <div className="flex items-center">
-              <FaChalkboardTeacher className="w-8 h-8 mr-2 text-emerald-500"></FaChalkboardTeacher>
-              <li>Expert Instructors</li>
-            </div>
-            <div className="flex items-center">
-              <MdOutlineClass className="w-8 h-8 mr-2 text-emerald-500"></MdOutlineClass>
-              <li>Comprehensive Curriculum</li>
-            </div>
-            <div className="flex items-center">
-              <BiTask className="w-8 h-8 mr-2 text-emerald-500"></BiTask>
-              <li>Hands-on Practice</li>
-            </div>
-            <div className="flex items-center">
-              <MdFeedback className="w-8 h-8 mr-2 text-emerald-500"></MdFeedback>
-              <li>Feedback and Critique</li>
-            </div>
-            <div className="flex items-center">
-              <FaUsers className="w-8 h-8 mr-2 text-emerald-500"></FaUsers>
-              Peer Interaction
-            </div>
-            <div className="flex items-center">
-              <BsUniversalAccessCircle className="w-8 h-8 mr-2 text-emerald-500"></BsUniversalAccessCircle>
-              <li>Lifetime Access to Course Materials</li>
-            </div>
-            <div className="flex items-center">
-              <BsFillCalendar2RangeFill className="w-8 h-8 mr-2 text-emerald-500"></BsFillCalendar2RangeFill>
-              Suitable for All Skill Levels
-            </div>
-            <div className="flex items-center">
-              <FaMoneyCheckAlt className="w-8 h-8 mr-2 text-emerald-500"></FaMoneyCheckAlt>
-              Cost-effective Learning
-            </div>
-            <div className="flex items-center">
-              <FcSelfie className="w-8 h-8 mr-2 text-emerald-500"></FcSelfie>
-              Build a Portfolio
-            </div>
-            <div className="flex items-center">
-              <TbCertificate className="w-8 h-8 mr-2 text-emerald-500"></TbCertificate>
-              Certificate of Completion
-            </div>
-            <div className="flex items-center">
-              <FaSpaceAwesome className="w-8 h-8 mr-2 text-emerald-500">
-                {" "}
-              </FaSpaceAwesome>
-              Learning at Your Own Pace
-            </div>
-            <div className="flex items-center">
-              <FaIndustry className="w-8 h-8 mr-2 text-emerald-500"></FaIndustry>
-              Access to Industry Insights
-            </div>
-            <div className="flex items-center">
-              <GiMaterialsScience className="w-8 h-8 mr-2 text-emerald-500"></GiMaterialsScience>
-              No Equipment Limitations
-            </div>
-            <div className="flex items-center">
-              <AiOutlineGlobal className="w-8 h-8 mr-2 text-emerald-500"></AiOutlineGlobal>
-              Global Learning Community
-            </div>
+        {/* Facilities Grid */}
+        <div 
+          className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-3xl shadow-xl p-8 md:p-12 mb-12"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {facilities.map((facility, index) => {
+              const Icon = facility.icon;
+              return (
+                <li 
+                  key={index} 
+                  className="flex items-center gap-4 p-4 bg-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 group"
+                >
+                  <div className="flex-shrink-0 w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
+                    <Icon className="w-7 h-7 text-blue-500 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <span className="text-gray-700 font-medium">{facility.text}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
-        {/* facilities bg */}
-        <div data-aos="fade-up" data-aos-duration="5000" className="p-10 ">
-          <div className="facility-bg h-64 rounded-md pt-20 ps-10">
-            <p className="text-xl mb-2">
-              Unlock Your Photography Potential with Our Online <br /> Summer
-              Camp Course!
-            </p>
-            <Link to="/class" className="btn bg-teal-500 border-none">
-              See Courses
-            </Link>
+        {/* Call to Action Section */}
+        <div 
+          data-aos="fade-up" 
+          data-aos-duration="1000" 
+          className="relative rounded-3xl overflow-hidden shadow-2xl"
+        >
+          <div className="facility-bg h-80 flex items-center justify-center relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-teal-900/60"></div>
+            <div className="relative z-10 text-center text-white px-4">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                Unlock Your Photography Potential
+              </h3>
+              <p className="text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+                Join our online summer camp course and transform your passion into professional skills
+              </p>
+              <Link 
+                to="/classes" 
+                className="btn btn-lg bg-blue-500 hover:bg-blue-600 border-none text-white px-10"
+              >
+                Explore All Courses
+              </Link>
+            </div>
           </div>
         </div>
-        
       </div>
     </div>
   );

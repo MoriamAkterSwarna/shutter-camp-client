@@ -31,7 +31,7 @@ const Payments = () => {
   return (
     <div>
       <Slide>
-        <h3 className="text-3xl font-semibold text-emerald-500 text-center uppercase">
+        <h3 className="text-3xl font-semibold text-blue-500 text-center uppercase">
           
           Payment
         </h3>

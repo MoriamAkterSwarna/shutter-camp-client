@@ -11,7 +11,7 @@ const EnrolledClass = () => {
 
   useEffect(()=>{
     let isMounted = true;
-    fetch('https://shutter-camp-server.vercel.app/payments')
+    fetch('https://shutter-camp-server-nine.vercel.app/payments')
     .then(res => res.json())
     .then(data =>{
       // console.log(data)
@@ -30,13 +30,13 @@ const EnrolledClass = () => {
     <div>
       <Slide>
         
-        <h3 className="text-3xl font-semibold text-emerald-500 text-center">
+        <h3 className="text-3xl font-semibold text-blue-500 text-center">
           
           Enrolled Classes: {enroll.length}
         </h3>
       </Slide>
       <Bounce delay={1e3} cascade damping={1e-1}>
-      <div className="overflow-x-auto bg-emerald-100 p-6 mt-4 rounded-lg border-2">
+      <div className="overflow-x-auto bg-blue-100 p-6 mt-4 rounded-lg border-2">
         <table className="table table-zebra">           
            <thead>
             <tr>
@@ -55,7 +55,7 @@ const EnrolledClass = () => {
                 <th>{index + 1}</th>
                  <td>{enrolItem.pay.cName}</td>
                  <td>{enrolItem.pay.instructorName}</td>
-                 <td><img className="w-20 rounded-full border-2 border-emerald-800 p-1" src={enrolItem.pay.image} alt="" /></td>
+                 <td><img className="w-20 rounded-full border-2 border-blue-800 p-1" src={enrolItem.pay.image} alt="" /></td>
                 <td>{enrolItem.pay.price}</td>
                 
                 <td>{enrolItem.pay.seats}</td>

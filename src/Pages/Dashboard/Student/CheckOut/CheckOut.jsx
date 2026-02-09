@@ -101,7 +101,7 @@ const CheckOut = ({ payable, price }) => {
 
   return (
     <>
-      <form className="payment-form p-4 m-8 bg-emerald-100" onSubmit={handleSubmit}>
+      <form className="payment-form p-4 m-8 bg-blue-100" onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
@@ -119,7 +119,7 @@ const CheckOut = ({ payable, price }) => {
           }}
         />
         <button
-          className="pay-btn btn bg-emerald-500 hover:bg-emerald-700"
+          className="pay-btn btn bg-blue-500 hover:bg-blue-700"
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >
@@ -128,7 +128,7 @@ const CheckOut = ({ payable, price }) => {
       </form>
       {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
       {transactionId && (
-        <p className="text-emerald-500 font-semibold">
+        <p className="text-blue-500 font-semibold">
           Transaction complete with transactionId: {transactionId}
         </p>
       )}

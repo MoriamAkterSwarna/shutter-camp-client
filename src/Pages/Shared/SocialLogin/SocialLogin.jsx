@@ -18,7 +18,7 @@ const SocialLogin = () => {
       console.log(loggedInUser);
       const savedUser = { name: loggedInUser.displayName, email: loggedInUser.email, photoURL:loggedInUser.photoURL, role: 'student' };
             console.log(savedUser);
-            fetch("https://shutter-camp-server.vercel.app/users", {
+            fetch("https://shutter-camp-server-nine.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -54,7 +54,7 @@ const SocialLogin = () => {
     <div>
       <div className="divider"></div>
       <div className="w-full text-center my-4">
-        <button className="btn btn-circle bg-emerald-500 border-none hover:bg-emerald-700 mr-2">
+        <button className="btn btn-circle bg-blue-500 border-none hover:bg-blue-700 mr-2">
           <FaGoogle onClick={handleGoogleSignIn} className="text-white text-xl"></FaGoogle>
         </button>
         

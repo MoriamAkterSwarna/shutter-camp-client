@@ -12,7 +12,7 @@ const PaymentInfo = () => {
 
   useEffect(()=>{
     let isMounted = true;
-    fetch('https://shutter-camp-server.vercel.app/payments')
+    fetch('https://shutter-camp-server-nine.vercel.app/payments')
     .then(res => res.json())
     .then(data =>{
       // console.log(data)
@@ -30,12 +30,12 @@ const PaymentInfo = () => {
         <div>
      <Slide>
         
-       <h3 className="text-3xl font-semibold text-emerald-500 text-center">
+       <h3 className="text-3xl font-semibold text-blue-500 text-center">
                      Payment Information
        </h3>
        </Slide>
        <Rotate delay={1e3} cascade damping={1e-1}>
-      <div className="overflow-x-auto bg-emerald-100 p-6 mt-4 rounded-lg border-2">
+      <div className="overflow-x-auto bg-blue-100 p-6 mt-4 rounded-lg border-2">
        <table className="table table-zebra">           
            <thead>
              <tr>

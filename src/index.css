@@ -2,26 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Facility Background */
 .facility-bg {
   background-image: url("./assets/heart-shape-leaf-eyeglasses-wallet-camera-gray-background.jpg");
-
   background-size: cover;
   background-repeat: no-repeat;
-  content: normal;
+  background-position: center;
   object-fit: fill;
 }
-/* .clip-bg{
-  clip-path: polygon(50% 74%, 99% 45%, 100% 100%, 0 100%, 0 48%);
-  background-color: teal;
-  position: absolute;
-  bottom:0
-} */
 
-
+/* Navigation Active State */
 .active {
-  @apply font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-emerald-400 mr-1;
+  @apply font-medium tracking-wide text-blue-600 transition-colors duration-200 hover:text-blue-500 mr-1;
 }
 
 .default {
-  @apply font-medium tracking-wide text-black transition-colors duration-200 hover:text-emerald-600 mr-1;
+  @apply font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-600 mr-1;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.8s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out;
+}
+
+/* Custom Gradient Backgrounds */
+.gradient-blue {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.gradient-teal {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+}
+
+/* Custom Card Hover Effect */
+.card-hover {
+  transition: all 0.3s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
 }

@@ -5,50 +5,45 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter, FaYoutube } from "react-icon
 const Footer = () => {
   return (
     <>
-    <footer className="footer p-10 bg-black text-neutral-content">
-      <div>
-        <img className='w-20 h-20 rounded-md' src={logo} alt="" />
-        <p>
-          Shutter Camp 
-          <br />
-          123 Photography Lane, City, State 2012
-        </p>
-      </div>
-      <div>
-    <span className="footer-title">Services</span> 
-    <Link className="link link-hover">Photography Classes</Link> 
-    <Link className="link link-hover">Outdoor Workshops</Link> 
-    <Link className="link link-hover">Photo Editing Training</Link> 
-    <Link className="link link-hover">Portfolio Reviews</Link>
-  </div> 
-  <div>
-    <span className="footer-title">Company</span> 
-    <Link className="link link-hover">About us</Link> 
-    <Link className="link link-hover">Our Team</Link> 
-    <Link className="link link-hover">Contact</Link> 
-    <Link className="link link-hover">Testimonials</Link>
-  </div> 
-  <div></div>
-      <div>
-        <span className="footer-title">Social</span>
-        <div className="grid grid-flow-col gap-4">
-          <a>
-            <FaTwitter className='text-xl'></FaTwitter>
-          </a>
-          <a>
-            <FaYoutube className='text-xl'></FaYoutube>
-          </a>
-          <a>
-            <FaFacebook className='text-xl'></FaFacebook>
-          </a>
+    <footer className="p-10 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 text-white rounded-t-3xl shadow-2xl mt-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="flex flex-col items-start">
+          <img className='w-20 h-20 rounded-xl shadow-lg border-2 border-white mb-2' src={logo} alt="Logo" />
+          <p className="font-bold text-lg mb-1">Shutter Camp</p>
+          <p className="text-sm text-blue-100">123 Photography Lane<br/>City, State 2012</p>
+        </div>
+        <div>
+          <span className="footer-title text-blue-200 font-semibold mb-2 block">Services</span>
+          <ul className="space-y-1">
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Photography Classes</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Outdoor Workshops</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Photo Editing Training</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Portfolio Reviews</Link></li>
+          </ul>
+        </div>
+        <div>
+          <span className="footer-title text-blue-200 font-semibold mb-2 block">Company</span>
+          <ul className="space-y-1">
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">About us</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Our Team</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Contact</Link></li>
+            <li><Link className="hover:underline hover:text-blue-200 transition-colors duration-200">Testimonials</Link></li>
+          </ul>
+        </div>
+        <div>
+          <span className="footer-title text-blue-200 font-semibold mb-2 block">Social</span>
+          <div className="flex gap-4 mt-2">
+            <a href="#" className="hover:text-blue-300 transition-colors duration-200"><FaTwitter className='text-2xl' /></a>
+            <a href="#" className="hover:text-blue-300 transition-colors duration-200"><FaYoutube className='text-2xl' /></a>
+            <a href="#" className="hover:text-blue-300 transition-colors duration-200"><FaFacebook className='text-2xl' /></a>
+          </div>
         </div>
       </div>
-      
     </footer>
-    <div className='bg-black text-center pb-10'>
-    <p className='text-white'>Copyright &copy; 2023 - All right reserved By <span className='text-emerald-700'>Moriam Akter Swarna</span></p>
-
-    </div></>
+    <div className='bg-blue-900 text-center py-4 rounded-b-3xl shadow-xl'>
+      <p className='text-blue-100 text-sm'>Copyright &copy; 2023 - All rights reserved by <span className='text-blue-200 font-bold'>Moriam Akter Swarna</span></p>
+    </div>
+    </>
   );
 };
 

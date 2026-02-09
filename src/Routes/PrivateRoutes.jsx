@@ -7,7 +7,7 @@ const PrivateRoutes = ({children}) => {
     const location = useLocation();
 
     if(loader){
-        return <progress className="bg-emerald-500 progress w-56"></progress>
+        return <progress className="bg-blue-500 progress w-56"></progress>
     }
 
     if (user) {
